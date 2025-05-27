@@ -57,6 +57,13 @@ table input[type="submit"] {
   line-height: 25px;
 }
 
+table button{
+  background-color: black;
+  color: whitesmoke;
+  font-weight: bold;
+  line-height: 25px;
+}
+
 table select{
   display: inline-block;
   height: 32px;

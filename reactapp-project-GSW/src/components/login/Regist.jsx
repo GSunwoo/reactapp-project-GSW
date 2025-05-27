@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { firestore } from "../../config/firestoreConfig";
 import '../../registForm.css';
 
@@ -24,33 +25,51 @@ function Regist(props) {
     console.log('입력성공');
   }
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  const handleAddressSearch = () => {
+    new window.daum.Postcode({
+      oncomplete: function (data) {
+        document.getElementById('zipcode').value = data.zonecode;
+        document.getElementById('roadAddress').value = data.roadAddress;
+        document.getElementById('detailAddress').focus();
+      },
+    }).open();
+  };
+
   return (<>
     <h2>회원가입폼</h2>
-    <form action="" className="registForm" style={{margin:'20px'}}>
+    <form action="" className="registForm" style={{ margin: '20px' }}>
       <table>
         <colgroup>
-          <col width="25%"/>
-          <col width="*"/>
+          <col width="25%" />
+          <col width="*" />
         </colgroup>
         <tbody>
           <tr>
             <td className="star">아이디</td>
             <td>
-              <input type="text"/>
-              <input type="submit" value="중복확인"/>&nbsp;&nbsp;
+              <input type="text" id="userId" />
+              &nbsp;&nbsp;
+              <button>중복확인</button> &nbsp;
               <span>+ 4~15자, 첫 영문자, 영문자와 숫자 조합</span>
             </td>
           </tr>
           <tr>
             <td className="star">비밀번호</td>
             <td>
-              <input type="text" />
+              <input type="password" id="userPw" />
             </td>
           </tr>
           <tr>
             <td className="star">비밀번호 확인</td>
             <td>
-              <input type="text" />
+              <input type="password" id="userPwCheck" />
               <span>&nbsp;&nbsp;(확인을 위해 다시 입력해주세요.)</span>
             </td>
           </tr>
@@ -61,65 +80,55 @@ function Regist(props) {
             </td>
           </tr>
           <tr>
-            <td className="nostar">생년월일</td>
-            <td>
-              <input type="radio" name="gender" id="" />남자&nbsp;&nbsp;
-              <input type="radio" name="gender" id="" />여자&nbsp;&nbsp;&nbsp;
-              <input type="number" name="" id="" style={{width: "70px"}} />년&nbsp;
-              <input type="number" name="" id="" style={{width: "50px"}} />월&nbsp;
-              <input type="number" name="" id="" style={{width: "50px"}} />일&nbsp;
-              <span style={{marginLeft: "20px"}}>(예: 2000년 01월 31일)</span>
-            </td>
-          </tr>
-          <tr>
             <td className="star">이메일</td>
             <td>
               <input type="text" name="" id="" /> @
               <input type="text" name="" id="" />
               &nbsp;
-              <select name="" id="">
-                <option value="gmail.com">gmail.com</option>
-                <option value="">naver.com</option>
-                <option value="">daum.net</option>
+              <select id="">
+                <option value="0">직접입력</option>
+                <option value="1">gmail.com</option>
+                <option value="2">naver.com</option>
+                <option value="3">daum.net</option>
               </select>
             </td>
           </tr>
           <tr>
-            <td className="nostar" rowSpan="3">주소</td>
+            <td className="star" rowSpan="3">주소</td>
             <td>
-              <input type="submit" value="주소찾기" />
-              <input type="number" name="" id="" style={{width: "100px"}} /> (우편번호)
+              <button type="button" onClick={handleAddressSearch}>주소찾기</button>&nbsp;&nbsp;
+              <input type="text" id="zipcode" style={{ width: "100px" }} readOnly /> (우편번호)
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" name="" id="" style={{width: "97%"}} />
+              <input type="text" id="roadAddress" style={{ width: "97%" }} readOnly />
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" name="" id="" style={{width: "70%"}} />
-              &nbsp;<span style={{color:'gray'}}>(상세주소)</span> 
+              <input type="text" id="detailAddress" style={{ width: "70%" }} />
+              &nbsp;<span style={{ color: 'gray' }}>(상세주소)</span>
             </td>
           </tr>
           <tr>
-            <td className="nostar">전화번호</td>
+            <td className="star">전화번호</td>
             <td>
-              <input type="number" name="" id="" style={{width: "50px"}} />-
-              <input type="number" name="" id="" style={{width: "50px"}} />-
-              <input type="number" name="" id="" style={{width: "50px"}} />
+              <input type="number" id="firstNum" style={{ width: "50px" }} />-
+              <input type="number" id="midNum" style={{ width: "50px" }} />-
+              <input type="number" id="lastNum" style={{ width: "50px" }} />
             </td>
           </tr>
         </tbody>
-        <tfoot style={{textAlign:'center'}}>
+        <tfoot style={{ textAlign: 'center' }}>
           <tr>
-            <td colSpan={2} style={{border:'none'}}>
+            <td colSpan={2} style={{ border: 'none' }}>
               <input type="submit" value="가입하기" />
             </td>
           </tr>
         </tfoot>
       </table>
     </form>
-  </>); 
+  </>);
 }
 export default Regist;
