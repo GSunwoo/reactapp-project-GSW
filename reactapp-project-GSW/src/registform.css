@@ -13,12 +13,7 @@ table td {
 table td.star {
   padding-left: 10px;
   font-weight: bold;
-  background-color: #dfdfdf;
-}
-
-table td.nostar {
-  font-weight: bold;
-  background-color: #dfdfdf;
+  background-color: #ffc4c9;
 }
 
 table td input {
@@ -34,12 +29,6 @@ table td.star::before {
   top: 2px;
 }
 
-table td.nostar::before {
-  display: inline-block;
-  width: 15px;
-  content: "";
-}
-
 table td span {
   font-size: 14px;
   color: gray;
@@ -51,17 +40,32 @@ table input[type="radio"] {
 }
 
 table input[type="submit"] {
-  background-color: black;
+  background-color: #F67C78;
   color: whitesmoke;
   font-weight: bold;
   line-height: 25px;
+  border: #F67C78;
+  height: 35px;
+  width: 80px;
+  font-size: 0.9em;
+}
+
+table input[type="submit"]:hover{
+  cursor: pointer;
+  background-color: #e0757c;
 }
 
 table button{
-  background-color: black;
+  background-color: #F67C78;
   color: whitesmoke;
   font-weight: bold;
   line-height: 25px;
+  border: #F67C78;
+}
+
+table button:hover{
+  cursor: pointer;
+  background-color: #e0757c;
 }
 
 table select{

@@ -338,6 +338,15 @@
 		outline: 0;
 	}
 
+	#menu button{
+		background-color: #F67C78;
+		color: #ffffff;
+		border: none;
+		border-radius: 3px;
+		padding: 5px;
+		margin-left: 10px;
+	}
+
 	/* #menu li:hover a,
 	#menu li.active a,
 	#menu li.active span {} */
@@ -345,6 +354,7 @@
 	#menu .current_page_item a {
 		background: #F67C78;
 		color: #FFF;
+		border-radius: 10px;
 	}
 
 
@@ -662,7 +672,7 @@
 	ul.tools li a {
 		color: #FFF;
 	}
-
+class
 	ul.tools li a:before {
 		display: inline-block;
 		background: #1ABC9C;
@@ -715,4 +725,16 @@
 
 	#article {
 		position: relative;
+		flex: 1
+	}
+
+	#main-wrapper{
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	#main{
+		height: 100%;
+		margin: 0;
 	}

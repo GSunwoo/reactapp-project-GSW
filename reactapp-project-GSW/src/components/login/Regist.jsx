@@ -6,6 +6,7 @@ import '../../registForm.css';
 
 function Regist(props) {
 
+  // 날짜 함수
   const nowDate = () => {
     let dateObj = new Date();
     var year = dateObj.getFullYear();
@@ -14,6 +15,7 @@ function Regist(props) {
     return year + '-' + month + '-' + day;
   }
 
+  // 멤버 추가
   const memberWrite = async (p_id, p_pass, p_name) => {
     // doc으로 입력을 위한 컬렉션과 도큐먼트를 만든 후 JS객체로 정보 추가
     await setDoc(doc(firestore, 'members', p_id), {
@@ -32,6 +34,7 @@ function Regist(props) {
     document.body.appendChild(script);
   }, []);
 
+  // 우편번호
   const handleAddressSearch = () => {
     new window.daum.Postcode({
       oncomplete: function (data) {
@@ -42,10 +45,19 @@ function Regist(props) {
     }).open();
   };
 
+  // 전화번호 포커스 이동
+  function commonFocusMove(obj1, maxLen, obj2) {
+    var obj = document.getElementById(obj1);
+    var strLen = obj.value.length;
+    if (strLen == maxLen) {
+      document.getElementById(obj2).focus();
+    }
+  }
+
   return (<>
     <h2>회원가입폼</h2>
     <form action="" className="registForm" style={{ margin: '20px' }}>
-      <table>
+      <table id="registForm">
         <colgroup>
           <col width="25%" />
           <col width="*" />
@@ -114,9 +126,9 @@ function Regist(props) {
           <tr>
             <td className="star">전화번호</td>
             <td>
-              <input type="number" id="firstNum" style={{ width: "50px" }} />-
-              <input type="number" id="midNum" style={{ width: "50px" }} />-
-              <input type="number" id="lastNum" style={{ width: "50px" }} />
+              <input type="text" maxLength={3} id="firstNum" style={{ width: "50px" }} onKeyUp={commonFocusMove('firstNum',3,'midNum')}/>-
+              <input type="text" maxLength={4} id="midNum" style={{ width: "50px" }} onKeyUp={commonFocusMove('midNum',4,'lastNum')}/>-
+              <input type="text" maxLength={4} id="lastNum" style={{ width: "50px" }} />
             </td>
           </tr>
         </tbody>
