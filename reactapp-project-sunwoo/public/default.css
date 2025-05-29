@@ -52,6 +52,16 @@
 		width: 1200px;
 	}
 
+	.mainBox {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
+	.mainBox > article{
+		flex: 1;
+	}
+
 
 	/*********************************************************************************/
 	/* Form Style                                                                    */
@@ -76,7 +86,7 @@
 	form textarea {
 		position: relative;
 		/* -webkit-appearance: none; */
-		appearance: none;
+		/* appearance: none; */
 		display: block;
 		border: 0;
 		background: #fff;
@@ -484,6 +494,7 @@
 		height: 70px;
   	bottom: 0;
 		background: #E4C65D;
+		flex: 1;
 	}
 
 	#copyright p {
@@ -737,4 +748,19 @@ class
 	#main{
 		height: 100%;
 		margin: 0;
+	}
+
+	.edit{
+		background-color: #F67C78;
+		color: whitesmoke;
+		font-weight: bold;
+		border: none;
+		border-radius: 5px;
+		padding: 8px 15px;
+		font-size: 14px;
+		text-decoration: none;
+	}
+	.edit:hover{
+		cursor: pointer;
+  	background-color: #ff6973;
 	}

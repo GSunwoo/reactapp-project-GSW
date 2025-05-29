@@ -11,15 +11,12 @@ function Login(props) {
 
   const getCollection = async () => {
     let idArray = [];
-    // 컬렉션명으로 하위 도큐먼트를 읽어온다.
     const querySnapshot = await getDocs(collection(firestore, 'members'));
-    // 배열로 얻어온 도큐먼트의 갯수만큼 반복
     querySnapshot.forEach((doc) => {
-      // 콜백된 객체(doc)를 기반으로 data()함수를 호출하여 실제데이터 얻기
       let memberInfo = doc.data();
       idArray.push({id:doc.id, pw:memberInfo.pw});
+      idArray.push([doc.id, memberInfo.pw]);
     });
-    // 파싱된 데이터를 통해 스테이트 변경 및 리렌더링
     setMemberIds(idArray);
   }
 
@@ -28,7 +25,8 @@ function Login(props) {
     getCollection();
   })
 
-  return (<>
+  return (
+  <article>
     <div className="wrapper-login">
       <h2>Login</h2>
       <form action="" onSubmit={(e)=>{
@@ -49,7 +47,7 @@ function Login(props) {
           return;
         }
 
-        login();
+        login(e.target.userId.value);
         alert('로그인 성공');
       }}>
         ID<input type="text" name="userId" id="userId" /><br />
@@ -58,6 +56,6 @@ function Login(props) {
       </form>
       <Link to='/regist'>회원가입</Link>
     </div>
-  </>); 
+  </article>); 
 }
 export default Login;

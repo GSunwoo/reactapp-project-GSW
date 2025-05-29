@@ -26,7 +26,7 @@ function Nav() {
                 )}
             </li>
             <li className={currentPath === '/pubboard' ? 'current_page_item' : ''}>
-              <Link to='/pubboard' accessKey="2" title="">자유 게시판</Link></li>
+              <Link to='/pubboard' accessKey="2" title="">공용 게시판</Link></li>
             <li className={currentPath === '/qnaboard' ? 'current_page_item' : ''}>
               <Link to='/qnaboard' accessKey="3" title="">질문 게시판</Link></li>
             <li className={currentPath === '/searchgroup' ? 'current_page_item' : ''}>

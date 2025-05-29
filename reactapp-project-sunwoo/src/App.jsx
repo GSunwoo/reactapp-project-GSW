@@ -13,6 +13,7 @@ import Footer from "./components/common/Footer";
 import QnABoard from "./components/qnaboard/QnABoard";
 import GroupChat from "./components/groupchat/GroupChat";
 import Regist from "./components/login/Regist";
+import MemberEdit from "./components/mypage/MemberEdit";
 
 function App() {
 
@@ -24,21 +25,27 @@ function App() {
       <Nav />
 
       {/* 메인 */}
-      <article id="article" className="container">
+      <div id="article" className="container">
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/regist" element={<Regist/>}/>
           <Route path="/mypage" element={<Mypage/>}/>
-          <Route path="/pubboard" element={<PublicBoard/>}/>
+          <Route path="/pubboard">
+            <Route index element={<PublicBoard/>}/>
+            <Route path="write" element={<PublicWrite />}/>
+          </Route>
           <Route path="/qnaboard" element={<QnABoard/>}/>
           <Route path="/searchgroup" element={<Searchgroup/>}/>
           <Route path="/groupboard">
             <Route index element={<GroupBoard/>}/>
             <Route path="groupchat" element={<GroupChat/>}/>
           </Route>
+          <Route path="/edit">
+            <Route path="member" element={<MemberEdit/>}/>
+          </Route>
         </Routes>
-      </article>
+      </div>
 
       {/* 하단바 */}
       <Footer />

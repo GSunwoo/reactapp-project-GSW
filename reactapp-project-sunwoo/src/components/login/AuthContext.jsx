@@ -6,18 +6,22 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [itsMe, setItsMe] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const saved = Cookies.get('auth');
-    if (saved === 'true') {
+    console.log(saved);
+    if (saved) {
       setIsLoggedIn(true);
+      setItsMe(saved);
     }
   }, []);
 
-  const login = () => {
+  const login = (me) => {
     setIsLoggedIn(true);
-    Cookies.set('auth', 'true', { expires: 1 });
+    setItsMe(me);
+    Cookies.set('auth', me, { expires: 1 });
     navigate('/');
   };
 
@@ -27,9 +31,8 @@ export const AuthProvider = ({ children }) => {
     navigate('/');
   };
   
-  
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, itsMe }}>
       {children}
     </AuthContext.Provider>
   );

@@ -144,13 +144,12 @@ table button {
   border-radius: 5px;
   padding: 8px 15px;
   font-size: 14px;
-  transition: background-color 0.3s;
 }
 
 table input[type="submit"]:hover,
 table button:hover {
   cursor: pointer;
-  background-color: #e0757c;
+  background-color: #ff6973;
 }
 
 table select {

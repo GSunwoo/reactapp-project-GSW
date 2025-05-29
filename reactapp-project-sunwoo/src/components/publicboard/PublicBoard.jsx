@@ -1,4 +1,7 @@
 function PublicBoard(props) {
+
+  
+
   return (<>
     <div id="page-wrapper">
       {/* 메인 아티클 */}
