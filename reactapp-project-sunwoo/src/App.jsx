@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./components/login/AuthContext";
 
 // 컴포넌트
@@ -14,41 +14,46 @@ import QnABoard from "./components/qnaboard/QnABoard";
 import GroupChat from "./components/groupchat/GroupChat";
 import Regist from "./components/login/Regist";
 import MemberEdit from "./components/mypage/MemberEdit";
+import { GroupProvider } from "./components/common/GroupContext";
 
 function App() {
+  const location = useLocation();
+
+  const isGroupChatPage = location.pathname === "/groupboard/groupchat";
 
   return (
   <div id="main">
     <div id="main-wrapper">
     <AuthProvider>
       {/* 상단바 */}
-      <Nav />
+      {!isGroupChatPage && <Nav />}
 
-      {/* 메인 */}
-      <div id="article" className="container">
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/regist" element={<Regist/>}/>
-          <Route path="/mypage" element={<Mypage/>}/>
-          <Route path="/pubboard">
-            <Route index element={<PublicBoard/>}/>
-            <Route path="write" element={<PublicWrite />}/>
-          </Route>
-          <Route path="/qnaboard" element={<QnABoard/>}/>
-          <Route path="/searchgroup" element={<Searchgroup/>}/>
-          <Route path="/groupboard">
-            <Route index element={<GroupBoard/>}/>
-            <Route path="groupchat" element={<GroupChat/>}/>
-          </Route>
-          <Route path="/edit">
-            <Route path="member" element={<MemberEdit/>}/>
-          </Route>
-        </Routes>
-      </div>
-
+      <GroupProvider>
+         {/* 메인 */}
+        <div id="article" className="container">
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/regist" element={<Regist/>}/>
+            <Route path="/mypage" element={<Mypage/>}/>
+            <Route path="/pubboard">
+              <Route index element={<PublicBoard/>}/>
+              {/* <Route path="write" element={<PublicWrite />}/> */}
+            </Route>
+            <Route path="/qnaboard" element={<QnABoard/>}/>
+            <Route path="/searchgroup" element={<Searchgroup/>}/>
+            <Route path="/groupboard">
+              <Route index element={<GroupBoard/>}/>
+              <Route path="groupchat" element={<GroupChat/>}/>
+            </Route>
+            <Route path="/edit">
+              <Route path="member" element={<MemberEdit/>}/>
+            </Route>
+          </Routes>
+        </div>
+      </GroupProvider>
       {/* 하단바 */}
-      <Footer />
+      {!isGroupChatPage && <Footer />}
     </AuthProvider>
     </div>
   </div>

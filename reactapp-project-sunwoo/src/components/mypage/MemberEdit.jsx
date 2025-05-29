@@ -64,7 +64,7 @@ function MemberEdit(props) {
 
     // 아이디 가져오기
     getCollection();
-  }, []);
+  }, [ itsMe ]);
 
   // 우편번호
   const handleAddressSearch = () => {

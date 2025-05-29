@@ -15,7 +15,6 @@ function Login(props) {
     querySnapshot.forEach((doc) => {
       let memberInfo = doc.data();
       idArray.push({id:doc.id, pw:memberInfo.pw});
-      idArray.push([doc.id, memberInfo.pw]);
     });
     setMemberIds(idArray);
   }

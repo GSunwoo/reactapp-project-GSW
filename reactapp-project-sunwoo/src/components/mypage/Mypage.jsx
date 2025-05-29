@@ -1,33 +1,61 @@
 import { Link } from "react-router-dom";
 import { firestore } from "../../config/firestoreConfig";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, collection, getDocs } from "firebase/firestore";
 import { useAuth } from "../login/AuthContext";
 import { useEffect, useState } from "react";
 
 import '../../css/mypage.css'
+import { useGroups } from "../common/GroupContext";
 
 function Mypage(props) {
 
   const { itsMe, isLoggedIn } = useAuth();
+  const { groups } =useGroups();
   const [nowData, setNowData] = useState({});
-  console.log(itsMe, isLoggedIn);
+  const [myGroups, setMygroups] = useState([]);
+  console.log(myGroups);
 
-  const getCollection = async () => {
+  const getMember = async () => {
+    if(!itsMe){
+      return;
+    }
     const querySnapshot = await getDoc(doc(firestore, 'members', itsMe));
     let myData = querySnapshot.data();
     setNowData(myData);
   }
 
   useEffect(() => {
-    getCollection();
+    getMember();
+    getMyGroups();
   }, [itsMe, isLoggedIn]);
+
+  const getMyGroups = () => {
+    console.log(nowData.mygroup);
+    if(!nowData){
+      return;
+    }
+    const groupLi = [];
+    for(let i = 0; i<nowData.mygroup.length; i++){
+      groups.map((curr)=>{
+        if(nowData.mygroup[i]==curr.id){
+          groupLi.push(
+            <li key={curr.groupName+curr.id}>
+              <Link to={'./group'+curr.id}>{curr.groupName}</Link>
+            </li>
+          );
+        }
+      });
+    }
+    console.log(groupLi);
+    setMygroups(groupLi);
+  }
 
   return (<>
     <div id="page-wrapper">
       {/* 메인 아티클 */}
-      <div id="page" class="container">
+      <div id="page" className="container">
         <div id="content">
-          <div class="title">
+          <div className="title">
             <h2>내 정보</h2>
           </div>
           <div>
@@ -91,21 +119,14 @@ function Mypage(props) {
 
         {/* 사이드 */}
         <div id="sidebar">
-          <div class="title">
+          <div className="title">
             <h2>Sidebar</h2>
           </div>
-          <ul class="default">
-            <li><a href="#">Vestibulum luctus venenatis dui</a></li>
-            <li><a href="#">Integer rutrum nisl in mi</a></li>
-            <li><a href="#">Etiam malesuada rutrum enim</a></li>
-            <li><a href="#">Etiam malesuada rutrum enim</a></li>
-            <li><a href="#">Aenean elementum facilisis ligula</a></li>
-            <li><a href="#">Ut tincidunt elit vitae augue</a></li>
+          <ul className="default">
+            {myGroups}
           </ul>
-          <div class="section">
-            <h3>Aenean elementum facilisis</h3>
-            <p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
-            <a href="#" class="button button-small">Etiam posuere</a>
+          <div className="section">
+            <Link to="./group/regist" className="button button-small">그룹 만들기</Link>
           </div>
         </div>
       </div>
