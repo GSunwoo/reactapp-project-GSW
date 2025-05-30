@@ -38,7 +38,7 @@ function Nav() {
                       logout();
                       alert('로그아웃 됨');
                     }
-                  }}>로그아웃</button>
+                  }} style={{cursor:'pointer'}}>로그아웃</button>
                 ) : (
                   <></>
                 )}

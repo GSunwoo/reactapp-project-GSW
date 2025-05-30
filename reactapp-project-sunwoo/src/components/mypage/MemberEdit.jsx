@@ -51,7 +51,7 @@ function MemberEdit(props) {
 
   // 멤버 수정
   const memberWrite = async (newMem) => {
-    await setDoc(doc(firestore, 'members', newMem.id), newMem);
+    await setDoc(doc(firestore, 'members', newMem.id), {...nowData, ...newMem});
     console.log('수정성공');
   }
 

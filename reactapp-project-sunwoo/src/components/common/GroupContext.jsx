@@ -2,11 +2,26 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../../config/firestoreConfig';
+import Cookies from 'js-cookie';
 
 const GroupContext = createContext();
 
 export const GroupProvider = ({ children }) => {
-  const [groups, setGroups] = useState([false]);
+  const [groups, setGroups] = useState([]);
+  const [nextId, setNextId] = useState(1);
+
+  const setIdNum = () => {
+    const nowId = Number(localStorage.getItem('groupId'));
+    if(!isNaN(nowId)){
+      setNextId(nowId+1);
+    }
+  }
+
+  const updateIdNum = () => {
+    const nowId = Number(localStorage.getItem('groupId'));
+    localStorage.removeItem('groupId');
+    localStorage.setItem('groupId', nowId+1);
+  }
 
   const getGroup = async () => {
     const groupsArr = [];
@@ -23,13 +38,12 @@ export const GroupProvider = ({ children }) => {
     setGroups(groupsArr);
   }
 
-
   useEffect(() => {
     getGroup();
   }, []);
 
   return (
-    <GroupContext.Provider value={{ groups, setGroups}}>
+    <GroupContext.Provider value={{groups, setGroups, nextId, setIdNum, updateIdNum}}>
       {children}
     </GroupContext.Provider>
   );

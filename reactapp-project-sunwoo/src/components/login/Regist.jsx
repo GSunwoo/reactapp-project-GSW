@@ -80,7 +80,7 @@ function Regist(props) {
   // 멤버 추가
   const memberWrite = async (newMem) => {
     // doc으로 입력을 위한 컬렉션과 도큐먼트를 만든 후 JS객체로 정보 추가
-    await setDoc(doc(firestore, 'members', newMem.id), {...newMem, time:nowDate(), mygroup:[]});
+    await setDoc(doc(firestore, 'members', newMem.id), {...newMem, time:nowDate(), mygroup:['1','2']});
     console.log('입력성공');
   }
 

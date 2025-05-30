@@ -1,0 +1,88 @@
+.wrapper-groupregist {
+  width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 2px solid #F67C78;
+  border-radius: 10px;
+  background-color: #fff5f5;
+  box-shadow: 0 0 12px rgba(246, 124, 120, 0.2);
+  font-family: "Arial", sans-serif;
+}
+
+.wrapper-groupregist h2 {
+  text-align: center;
+  color: #F67C78;
+  margin-bottom: 25px;
+}
+
+.wrapper-groupregist table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.wrapper-groupregist th {
+  text-align: left;
+  background-color: #ffc4c9;
+  color: #333;
+  padding: 10px;
+  width: 150px;
+  vertical-align: top;
+  font-weight: bold;
+  border: 1px solid #f3c3c5;
+}
+
+.wrapper-groupregist td {
+  padding: 10px;
+  border: 1px solid #f3c3c5;
+}
+
+.wrapper-groupregist input[type="text"],
+.wrapper-groupregist textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.wrapper-groupregist textarea {
+  min-height: 80px;
+}
+
+.wrapper-groupregist input[type="submit"] {
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.wrapper-groupregist input[type="submit"]:hover {
+  background-color: #e0757c;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper-groupregist {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .wrapper-groupregist th,
+  .wrapper-groupregist td {
+    display: block;
+    width: 100%;
+  }
+
+  .wrapper-groupregist th {
+    margin-bottom: 5px;
+  }
+
+  .wrapper-groupregist td {
+    padding-top: 0;
+  }
+}

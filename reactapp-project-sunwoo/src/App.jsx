@@ -7,14 +7,17 @@ import Mypage from "./components/mypage/Mypage";
 import PublicBoard from "./components/publicboard/PublicBoard";
 import Login from "./components/login/Login";
 import Home from "./components/home/Home";
-import GroupBoard from "./components/groupboard/GroupBoard";
+import GroupBoard from "./components/group/groupboard/GroupBoard";
 import Searchgroup from "./components/searchgroup/Searchgroup";
 import Footer from "./components/common/Footer";
 import QnABoard from "./components/qnaboard/QnABoard";
-import GroupChat from "./components/groupchat/GroupChat";
+import GroupChat from "./components/group/groupchat/GroupChat";
 import Regist from "./components/login/Regist";
 import MemberEdit from "./components/mypage/MemberEdit";
+import RegistGroup from "./components/group/RegistGroup";
+
 import { GroupProvider } from "./components/common/GroupContext";
+import ViewGroup from "./components/group/ViewGroup";
 
 function App() {
   const location = useLocation();
@@ -36,10 +39,9 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/regist" element={<Regist/>}/>
             <Route path="/mypage" element={<Mypage/>}/>
-            <Route path="/pubboard">
-              <Route index element={<PublicBoard/>}/>
-              {/* <Route path="write" element={<PublicWrite />}/> */}
-            </Route>
+            <Route path="/pubboard" element={<PublicBoard/>}/>
+            <Route path="/group/view/:id"element={<ViewGroup/>}  />
+            <Route path="/group/regist" element={<RegistGroup />}/>
             <Route path="/qnaboard" element={<QnABoard/>}/>
             <Route path="/searchgroup" element={<Searchgroup/>}/>
             <Route path="/groupboard">

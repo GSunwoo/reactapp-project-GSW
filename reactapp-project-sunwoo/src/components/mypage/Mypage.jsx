@@ -10,37 +10,43 @@ import { useGroups } from "../common/GroupContext";
 function Mypage(props) {
 
   const { itsMe, isLoggedIn } = useAuth();
-  const { groups } =useGroups();
+  const { groups } = useGroups();
   const [nowData, setNowData] = useState({});
   const [myGroups, setMygroups] = useState([]);
-  console.log(myGroups);
+  const [trigger, setTrigger] = useState(false);
 
   const getMember = async () => {
-    if(!itsMe){
+    if(itsMe===''){
       return;
     }
     const querySnapshot = await getDoc(doc(firestore, 'members', itsMe));
     let myData = querySnapshot.data();
     setNowData(myData);
+    setTrigger(!trigger);
   }
 
   useEffect(() => {
     getMember();
-    getMyGroups();
   }, [itsMe, isLoggedIn]);
 
+  useEffect(()=>{
+    if(Object.keys(nowData).length === 0) return;
+    console.log('nowData',nowData);
+    getMyGroups();
+  }, [trigger]);
+
   const getMyGroups = () => {
-    console.log(nowData.mygroup);
-    if(!nowData){
-      return;
-    }
+    console.log('nowmyg',nowData.mygroup);
+    if(nowData.mygroup===null)return;
+    
     const groupLi = [];
+    console.log(nowData);
     for(let i = 0; i<nowData.mygroup.length; i++){
       groups.map((curr)=>{
         if(nowData.mygroup[i]==curr.id){
           groupLi.push(
             <li key={curr.groupName+curr.id}>
-              <Link to={'./group'+curr.id}>{curr.groupName}</Link>
+              <Link to={'/group/view/'+curr.id}>{curr.groupName}</Link>
             </li>
           );
         }
@@ -120,13 +126,13 @@ function Mypage(props) {
         {/* 사이드 */}
         <div id="sidebar">
           <div className="title">
-            <h2>Sidebar</h2>
+            <h2>내 그룹</h2>
           </div>
           <ul className="default">
             {myGroups}
           </ul>
           <div className="section">
-            <Link to="./group/regist" className="button button-small">그룹 만들기</Link>
+            <Link to="/group/regist" className="button button-small">그룹 만들기</Link>
           </div>
         </div>
       </div>
