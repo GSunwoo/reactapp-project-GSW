@@ -40,14 +40,14 @@ function App() {
             <Route path="/regist" element={<Regist/>}/>
             <Route path="/mypage" element={<Mypage/>}/>
             <Route path="/pubboard" element={<PublicBoard/>}/>
+
             <Route path="/group/view/:id"element={<ViewGroup/>}  />
             <Route path="/group/regist" element={<RegistGroup />}/>
+            <Route path="/group/groupchat" element={<GroupChat />}/>
+            <Route path="/groupboard/:id" element={<GroupBoard/>}/>
+            
             <Route path="/qnaboard" element={<QnABoard/>}/>
             <Route path="/searchgroup" element={<Searchgroup/>}/>
-            <Route path="/groupboard">
-              <Route index element={<GroupBoard/>}/>
-              <Route path="groupchat" element={<GroupChat/>}/>
-            </Route>
             <Route path="/edit">
               <Route path="member" element={<MemberEdit/>}/>
             </Route>
