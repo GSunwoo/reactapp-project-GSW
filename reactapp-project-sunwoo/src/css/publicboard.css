@@ -1,0 +1,61 @@
+/* 게시판 전체 레이아웃 */
+#page-wrapper {
+  background-color: #fff5f5;
+  padding: 50px 0;
+  font-family: 'Arial', sans-serif;
+}
+
+
+/* 제목 스타일 */
+#content .title h2 {
+  color: #F67C78;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+#two-column ul {
+  margin-bottom: 70px;
+}
+
+/* 페이지 버튼 영역 */
+#two-column div {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#two-column button {
+  background-color: #F67C78;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#two-column button:disabled {
+  background-color: #ffc4c9;
+  cursor: not-allowed;
+}
+
+#two-column button:hover:not(:disabled) {
+  background-color: #e0757c;
+}
+
+/* 새 게시글 작성 버튼 */
+.button.button-small {
+  background-color: #F67C78;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: inline-block;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button.button-small:hover {
+  background-color: #e0757c;
+}

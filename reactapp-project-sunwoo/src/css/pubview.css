@@ -1,0 +1,73 @@
+.viewTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 30px auto;
+  background-color: #fff0f1;
+  font-family: "Arial", sans-serif;
+  border: none;
+  border-radius: 10px;
+}
+
+/* 공통 셀 스타일 */
+.viewTable td {
+  border: 1px solid #f4c2c5;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #333;
+}
+
+/* 헤더 셀 */
+.viewTable thead {
+  border: 1px solid #f4c2c5;
+  border-radius: 10px 10px 0 0;
+}
+.viewTable thead td:first-child,
+.viewTable thead tr:nth-child(2) td:first-child {
+  width: 100px;
+  background-color: #ffc4c9;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* 본문 */
+.viewTable tbody td {
+  background-color: #ffffff;
+  color: #444;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  border-radius: 0 0 10px 10px;
+}
+
+/* 푸터 버튼 영역 */
+.viewTable tfoot{
+  border: none;
+}
+
+.viewTable tfoot td {
+  border: none;
+  padding: 20px 0 0 10px;
+  text-align: left;
+}
+
+.viewTable tfoot a,
+.viewTable tfoot button {
+  background-color: #F67C78;
+  color: white;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.viewTable tfoot a:hover,
+.viewTable tfoot button:hover {
+  background-color: #e0757c;
+}

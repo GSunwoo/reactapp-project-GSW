@@ -159,5 +159,20 @@
   font-size: 15px;
   color: #333;
 }
+/* 팝업 느낌을 주기 위한 스타일 */
+.modal-dialog {
+  max-width: 360px;         /* 팝업 크기 작게 */
+  margin: 12% auto;         /* 화면 위쪽에 떠 있는 느낌 */
+}
 
+.modal-content {
+  border-radius: 12px;      /* 둥근 테두리 */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+  border: none;
+}
+
+/* 배경 흐림 정도 줄이기 (선택 사항) */
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.3);
+}
 

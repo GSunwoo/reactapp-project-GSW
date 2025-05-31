@@ -1,5 +1,9 @@
 import { Route, Routes, useLocation } from "react-router-dom";
+
+// 컨텍스트
 import { AuthProvider } from "./components/login/AuthContext";
+import { GroupProvider } from "./components/common/GroupContext";
+import { PublicProvider } from "./components/common/PublicContext";
 
 // 컴포넌트
 import Nav from "./components/common/Nav";
@@ -16,8 +20,10 @@ import Regist from "./components/login/Regist";
 import MemberEdit from "./components/mypage/MemberEdit";
 import RegistGroup from "./components/group/RegistGroup";
 
-import { GroupProvider } from "./components/common/GroupContext";
 import ViewGroup from "./components/group/ViewGroup";
+import PublicWrite from "./components/publicboard/PublicWrite";
+import PublicView from "./components/publicboard/PublicView";
+import PublicEdit from "./components/publicboard/PublicEdit";
 
 function App() {
   const location = useLocation();
@@ -31,31 +37,41 @@ function App() {
       {/* 상단바 */}
       {!isGroupChatPage && <Nav />}
 
+      <div id="article" className="container">
+      <PublicProvider>
       <GroupProvider>
          {/* 메인 */}
-        <div id="article" className="container">
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/regist" element={<Regist/>}/>
             <Route path="/mypage" element={<Mypage/>}/>
-            <Route path="/pubboard" element={<PublicBoard/>}/>
 
+            {/* 공용게시판 */}
+            <Route path="/pubboard" element={<PublicBoard/>}/>
+            <Route path="/pubboard/write" element={<PublicWrite/>}/>
+            <Route path="/pubboard/view/:id" element={<PublicView/>}/>
+            <Route path="/pubboard/edit/:id" element={<PublicEdit/>}/>
+
+            {/* 그룹 */}
             <Route path="/group/view/:id"element={<ViewGroup/>}  />
             <Route path="/group/regist" element={<RegistGroup />}/>
             <Route path="/group/groupchat" element={<GroupChat />}/>
             <Route path="/groupboard/:id" element={<GroupBoard/>}/>
+            <Route path="/searchgroup" element={<Searchgroup/>}/>
             
             <Route path="/qnaboard" element={<QnABoard/>}/>
-            <Route path="/searchgroup" element={<Searchgroup/>}/>
             <Route path="/edit">
               <Route path="member" element={<MemberEdit/>}/>
             </Route>
           </Routes>
-        </div>
       </GroupProvider>
+      </PublicProvider>
+      </div>
       {/* 하단바 */}
-      {!isGroupChatPage && <Footer />}
+      <div id='footer'>
+        {!isGroupChatPage && <Footer />}
+      </div>
     </AuthProvider>
     </div>
   </div>

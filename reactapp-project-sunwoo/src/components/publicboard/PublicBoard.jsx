@@ -1,6 +1,77 @@
+import { useEffect, useState } from "react";
+import { usePublic } from "../common/PublicContext";
+import { Link, useNavigate } from "react-router-dom";
+import '../../css/publicboard.css';
+
+
 function PublicBoard(props) {
 
-  
+  const navigete = useNavigate();
+  const { posts } = usePublic();
+  const [allPosts, setAllPosts] = useState([]);
+  const [pubPosts, setPubPosts] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const postsPerPage = 5;
+
+
+
+  function selectTime(time) {
+    if (time == null) return;
+    const now = new Date();
+
+    const pad = (num) => String(num).padStart(2, '0');
+
+    const year = now.getFullYear();
+    const month = pad(now.getMonth() + 1); // 0-based
+    const day = pad(now.getDate());
+
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+
+    const today = `${year}-${month}-${day}`;
+
+    const postdate = time.slice(0, 10);
+    const posttime = time.slice(11, 16);
+    if (today === postdate) {
+      return posttime;
+    }
+    else {
+      return postdate;
+    }
+  }
+
+  const getPublicPost = () => {
+    if (posts == null) return;
+
+    return (posts.map((curr) => {
+      return (
+        <li key={curr.id} style={{ display: "flex", justifyContent: "space-between", margin: '25px' }}>
+          <Link to={'./view/' + curr.id} style={{ flexGrow: 1, textDecoration: 'none', height: '25px' }}>
+            {curr.title}
+          </Link>
+          <span style={{ whiteSpace: "nowrap", marginLeft: "10px" }}>
+            {selectTime(curr.postTime)}
+          </span>
+        </li>
+      )
+    })
+    );
+  }
+
+
+  useEffect(() => {
+    setAllPosts(getPublicPost());
+  }, [posts, currentPage]);
+
+  useEffect(() => {
+    setTotalPages(Math.ceil(allPosts.length / postsPerPage));
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
+    setPubPosts(allPosts.slice(indexOfFirst, indexOfLast));
+  }, [allPosts, currentPage])
+
 
   return (<>
     <div id="page-wrapper">
@@ -8,52 +79,32 @@ function PublicBoard(props) {
       <div id="page" class="container">
         <div id="content">
           <div class="title">
-            <h2>여기는 전체 게시판</h2>
+            <h2>공용 게시판</h2>
           </div>
-          <p>테스트용.</p>
           <div id="two-column">
-            <div class="box1">
-              <ul class="default">
-                <li><a href="#">게시글1</a></li>
-                <li><a href="#">게시글2</a></li>
-                <li><a href="#">게시글3</a></li>
-                <li><a href="#">게시글4</a></li>
-                <li><a href="#">게시글5</a></li>
-              </ul><a href="#" class="button button-small">이건 뭐요?</a>
+            <ul style={{ height: '200px' }}>
+              {pubPosts}
+            </ul>
+            <div style={{ textAlign: 'center' }}>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}>
+                이전
+              </button>
+              <span style={{ margin: "0 10px" }}>
+                {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}>
+                다음
+              </button>
             </div>
-            <div class="box2">
-              <ul class="default">
-                <li><a href="#">Vestibulum luctus venenatis dui</a></li>
-                <li><a href="#">Integer rutrum nisl in mi</a></li>
-                <li><a href="#">Etiam malesuada rutrum enim</a></li>
-                <li><a href="#">Aenean elementum facilisis ligula</a></li>
-                <li><a href="#">Ut tincidunt elit vitae augue</a></li>
-              </ul><a href="#" class="button button-small">Etiam posuere</a>
-            </div>
-          </div>
-        </div>
-
-        {/* 사이드 */}
-        <div id="sidebar">
-          <div class="title">
-            <h2>Sidebar</h2>
-          </div>
-          <ul class="default">
-            <li><a href="#">Vestibulum luctus venenatis dui</a></li>
-            <li><a href="#">Integer rutrum nisl in mi</a></li>
-            <li><a href="#">Etiam malesuada rutrum enim</a></li>
-            <li><a href="#">Etiam malesuada rutrum enim</a></li>
-            <li><a href="#">Aenean elementum facilisis ligula</a></li>
-            <li><a href="#">Ut tincidunt elit vitae augue</a></li>
-          </ul>
-          <div class="section">
-            <h3>Aenean elementum facilisis</h3>
-            <p>Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
-            <a href="#" class="button button-small">Etiam posuere</a>
+            <button type="button" class="button button-small" onClick={() => { navigete('./write') }} style={{ border: 'none', cursor: 'pointer' }}>새 게시글 작성</button>
           </div>
         </div>
       </div>
     </div>
-  </>); 
+  </>);
 }
 export default PublicBoard;

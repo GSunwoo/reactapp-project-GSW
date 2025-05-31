@@ -1,0 +1,88 @@
+.wrapper-pubedit {
+  width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 2px solid #F67C78;
+  border-radius: 10px;
+  background-color: #fff5f5;
+  box-shadow: 0 0 12px rgba(246, 124, 120, 0.2);
+  font-family: "Arial", sans-serif;
+}
+
+.wrapper-pubedit h2 {
+  text-align: center;
+  color: #F67C78;
+  margin-bottom: 25px;
+}
+
+.wrapper-pubedit table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.wrapper-pubedit th {
+  text-align: left;
+  background-color: #ffc4c9;
+  color: #333;
+  padding: 10px;
+  width: 150px;
+  vertical-align: top;
+  font-weight: bold;
+  border: 1px solid #f3c3c5;
+}
+
+.wrapper-pubedit td {
+  padding: 10px;
+  border: 1px solid #f3c3c5;
+}
+
+.wrapper-pubedit input[type="text"],
+.wrapper-pubedit textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.wrapper-pubedit textarea {
+  min-height: 80px;
+}
+
+.wrapper-pubedit input[type="submit"] {
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.wrapper-pubedit input[type="submit"]:hover {
+  background-color: #e0757c;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper-pubedit {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .wrapper-pubedit th,
+  .wrapper-pubedit td {
+    display: block;
+    width: 100%;
+  }
+
+  .wrapper-pubedit th {
+    margin-bottom: 5px;
+  }
+
+  .wrapper-pubedit td {
+    padding-top: 0;
+  }
+}
