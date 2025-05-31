@@ -1,16 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import WriteGroup from "./WriteGroup";
 import ViewGroupBoard from "./ViewGroupBoard";
-import { useState } from "react";
+import {useAuth} from '../../login/AuthContext';
+import {useGroups} from '../../common/GroupContext';
+import { useEffect, useState } from "react";
+
 import '../../../css/modal.css';
 
 
 function GroupBoard(props) {
 
-  const [idx, setIdx] = useState(2);
-  const [comments, setComments] = useState([
-    {id:1, writer:'길동이', body:'오늘은 5월27일', likes:0, time:'2025-05-27 10:55:24'}
-  ]);
+  const {itsMe} = useAuth();
+  const {group} = useGroups();
+  const param = useParams();
+  const gid = param.id;
+
+  const [nowGroup, setNowGroup] = useState({});
+
+  const getNowGroup = () => {
+    if(group==null)return;
+    setNowGroup(group.reduce((pg,cg)=>{
+      if(cg.id===gid){
+        pg = cg;
+      }
+      return pg;
+    },{}));
+  }
+
+  useEffect(()=>{
+    getNowGroup();
+  },[group])
 
   return (<>
     <div id="page-wrapper">
@@ -21,7 +40,7 @@ function GroupBoard(props) {
             <h2>여기는 그룹 게시판</h2>
           </div>
           <div className="container mt-4">
-            <WriteGroup comments={comments} setComments={setComments} idx={idx} setIdx={setIdx} />
+            <WriteGroup gid={gid} nowGroup={nowGroup} />
             <ul className="list-group mt-3" >
               <ViewGroupBoard comments={comments} setComments={setComments} />
             </ul>

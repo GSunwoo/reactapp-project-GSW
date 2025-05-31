@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { firestore } from '../../config/firestoreConfig';
 import Cookies from 'js-cookie';
 
@@ -8,24 +8,40 @@ const GroupContext = createContext();
 
 export const GroupProvider = ({ children }) => {
   const [groups, setGroups] = useState([]);
-  const [nextId, setNextId] = useState(1);
 
-  const setIdNum = () => {
-    const nowId = Number(localStorage.getItem('groupId'));
-    if(!isNaN(nowId)){
-      setNextId(nowId+1);
+  const setGrPostId = () => {
+    const saved = localStorage.getItem('groupPost');
+    if(saved==undefined){
+      localStorage.setItem('groupPost', 1000);
     }
   }
 
-  const updateIdNum = () => {
-    const nowId = Number(localStorage.getItem('groupId'));
-    localStorage.removeItem('groupId');
-    localStorage.setItem('groupId', nowId+1);
+  const updateGrPostId = () =>{
+    const saved = Number(localStorage.getItem('groupPost'));
+    localStorage.removeItem('groupPost');
+    localStorage.setItem('groupPost', saved+1);
+  } 
+
+  const setIdNum = () => {
+    const saved = localStorage.getItem('groupId');
+    if(saved==undefined){
+      localStorage.setItem('groupId', 1);
+    }
   }
+
+  const updateIdNum = () =>{
+    const saved = Number(localStorage.getItem('groupId'));
+    localStorage.removeItem('groupId');
+    localStorage.setItem('groupId', saved+1);
+  } 
 
   const getGroup = async () => {
     const groupsArr = [];
-    const querySnapshot = await getDocs(collection(firestore, 'groups'));
+    const q = query(
+      collection(firestore, 'groups'),
+      orderBy('id','asc')
+    );
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       let group = doc.data();
       groupsArr.push({
@@ -40,10 +56,12 @@ export const GroupProvider = ({ children }) => {
 
   useEffect(() => {
     getGroup();
+    setGrPostId();
+    setIdNum();
   }, []);
 
   return (
-    <GroupContext.Provider value={{groups, setGroups, nextId, setIdNum, updateIdNum}}>
+    <GroupContext.Provider value={{groups, setGroups, updateIdNum, updateGrPostId}}>
       {children}
     </GroupContext.Provider>
   );

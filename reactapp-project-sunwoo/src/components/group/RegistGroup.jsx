@@ -8,16 +8,32 @@ import { useNavigate } from "react-router-dom";
 import '../../css/groupregi.css';
 
 function RegistGroup(props) {
-  const {itsMe, isLoggedIn} = useAuth();
-  const {setIdNum, updateIdNum} = useGroups();
+  const {itsMe} = useAuth();
+  const {updateIdNum} = useGroups();
   const navigate = useNavigate();
 
   const gid = localStorage.getItem('groupId')
 
+  function nowDate() {
+    const now = new Date();
+
+    const pad = (num) => String(num).padStart(2, '0');
+
+    const year = now.getFullYear();
+    const month = pad(now.getMonth() + 1); // 0-based
+    const day = pad(now.getDate());
+
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
   const groupRegist = async (newGroup) => {
     console.log('nextId',gid);
     console.log('newGroup',newGroup);
-    await setDoc(doc(firestore, 'groups', gid),{...newGroup, owner:itsMe});
+    await setDoc(doc(firestore, 'groups', gid),{...newGroup, owner:itsMe, regiDate:nowDate()});
     const mySnap = await getDoc(doc(firestore, 'members', itsMe));
     const myData = mySnap.data();
     await setDoc(doc(firestore, 'members', itsMe),{...myData, mygroup:[...myData.mygroup, newGroup.id]});
