@@ -1,0 +1,40 @@
+#chatWindow{
+  border:1px solid black; width:280px; height:310px; 
+	overflow:scroll; padding:5px; margin-bottom: 10px;
+}
+input[name=message]{width:236px; height:30px;}
+#sendBtn{height:30px; position:relative; top:2px; left:-2px;}
+#closeBtn{margin-bottom:3px; position:relative; top:2px; left:-2px;}
+#chatId{
+  width:143px; height:24px; border:1px solid #AAAAAA; 
+	background-color:#EEEEEE;
+}
+.myMsg{
+  text-align:left;
+  background-color: yellow;
+  display: inline-block;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-top: 10px;
+}
+
+.yourMsg{
+  text-align:left;
+  background-color: skyblue;
+  display: inline-block;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-top: 5px;
+}
+
+.chatName{
+  text-align:left;
+  font-weight: bold;
+  margin-bottom: -5px;
+}

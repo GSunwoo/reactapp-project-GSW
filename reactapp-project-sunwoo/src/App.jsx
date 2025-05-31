@@ -19,7 +19,7 @@ import GroupChat from "./components/group/groupchat/GroupChat";
 import Regist from "./components/login/Regist";
 import MemberEdit from "./components/mypage/MemberEdit";
 import RegistGroup from "./components/group/RegistGroup";
-
+import EnterGroup from './components/searchgroup/EnterGroup'
 import ViewGroup from "./components/group/ViewGroup";
 import PublicWrite from "./components/publicboard/PublicWrite";
 import PublicView from "./components/publicboard/PublicView";
@@ -59,6 +59,7 @@ function App() {
             <Route path="/group/groupchat" element={<GroupChat />}/>
             <Route path="/groupboard/:id" element={<GroupBoard/>}/>
             <Route path="/searchgroup" element={<Searchgroup/>}/>
+            <Route path="/searchgroup/enter/:id" element={<EnterGroup/>}/>
             
             <Route path="/qnaboard" element={<QnABoard/>}/>
             <Route path="/edit">

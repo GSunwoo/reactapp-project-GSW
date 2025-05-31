@@ -5,13 +5,6 @@ import { useAuth } from "../login/AuthContext";
 import { firestore } from "../../config/firestoreConfig";
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 
-
-const openChatWin = () => {
-
-  window.open(`/group/groupchat`, 'mychat'
-    , 'width=300,height=500');
-}
-
 function ViewGroup(props) {
   const params = useParams();
   const gid = params.id;
@@ -19,6 +12,13 @@ function ViewGroup(props) {
   const [nowGroup, setNowGroup] = useState({});
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
+  const {itsMe} = useAuth();
+  const [isMine, setIsMine] = useState(false);
+
+  const openChatWin = () => {
+    window.open(`/group/groupchat?roomId=${nowGroup.groupName}${nowGroup.id}&userId=${itsMe}&roomName=${nowGroup.groupName}`, ''
+      , 'width=400,height=600');
+  }
 
   const deleteFromArr = (arr, delElement) => {
     const newArr = arr.filter(curr=>curr!=delElement);
@@ -78,6 +78,15 @@ function ViewGroup(props) {
     getMembers();
   }, [groups]);
 
+  useEffect(()=>{
+    if(nowGroup.owner===itsMe){
+      setIsMine(true);
+    }
+    else{
+      setIsMine(false);
+    }
+  },[nowGroup])
+
   return (
     <div className="wrapper-viewgroup">
       <table>
@@ -100,11 +109,11 @@ function ViewGroup(props) {
       </table>
       <button type="button" onClick={()=>{navigate("/groupboard/"+gid)}}>그룹 게시판</button>
       <button type="button" onClick={openChatWin}>그룹 채팅</button>
-      <button type="button" onClick={()=>{
+      {isMine && (<button type="button" onClick={()=>{
         if(!confirm('삭제하시겠습니까?'))return;
         deleteGroup();
         updateMember();
-      }}>그룹 삭제</button>
+      }}>그룹 삭제</button>)}
     </div>
   );
 }

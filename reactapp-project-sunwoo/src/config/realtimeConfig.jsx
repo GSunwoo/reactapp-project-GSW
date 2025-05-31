@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
-const firebaseConfig = {
+const realtimeConfig = {
   apiKey: import.meta.env.VITE_apiKey,
   authDomain: import.meta.env.VITE_authDomain,
   projectId: import.meta.env.VITE_projectId,
@@ -12,7 +12,7 @@ const firebaseConfig = {
   databaseURL: import.meta.env.VITE_databaseURL
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(realtimeConfig);
 const realtime = getDatabase(app);
 // 익스포트(내보내기)
 export {realtime};

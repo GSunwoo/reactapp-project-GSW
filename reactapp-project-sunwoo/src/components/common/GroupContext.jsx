@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { firestore } from '../../config/firestoreConfig';
-import Cookies from 'js-cookie';
 
 const GroupContext = createContext();
 
@@ -48,7 +47,8 @@ export const GroupProvider = ({ children }) => {
         id: group.id,
         groupName: group.groupName,
         member: group.member,
-        comment: group.comment
+        comment: group.comment,
+        owner: group.owner
       });
     });
     setGroups(groupsArr);

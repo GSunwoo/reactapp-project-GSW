@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
-const firebaseConfig = {
+const storageConfig = {
   apiKey: import.meta.env.VITE_apiKey,
   authDomain: import.meta.env.VITE_authDomain,
   projectId: import.meta.env.VITE_projectId,
@@ -12,7 +12,7 @@ const firebaseConfig = {
   databaseURL: import.meta.env.VITE_databaseURL
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(storageConfig);
 // storage 객체 생성(본인의 스토리지 gs주소 사용)
 const storage = getStorage(app, 'gs://myreactapp-94a38.firebasestorage.app');
 // 익스포트(내보내기)
