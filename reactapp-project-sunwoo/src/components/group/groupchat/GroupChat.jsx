@@ -85,6 +85,7 @@ function GroupChat() {
       });
       setChatData(showDiv);
     });
+    scrollTop(chatWindow.current);
   },[]);
 
   return (<>

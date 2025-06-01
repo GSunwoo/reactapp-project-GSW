@@ -112,7 +112,7 @@ function Mypage(props) {
                   </td>
                 </tr>
               </tbody>
-              <tfoot style={{ textAlign: 'center' }}>
+              <tfoot style={{ textAlign: 'center', backgroundColor:'#fff5f5'}}>
                 <tr>
                   <td colSpan={2} style={{ border: 'none' }}>
                     <Link to='/edit/member' className="edit">정보 수정</Link>

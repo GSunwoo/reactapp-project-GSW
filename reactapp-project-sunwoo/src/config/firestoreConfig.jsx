@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_apiKey,
@@ -18,5 +19,6 @@ const app = initializeApp(firebaseConfig);
 // firestore를 위한 객체 생성
 const firestore = getFirestore(app);
 const realtime = getDatabase(app);
+const storage = getStorage(app, 'gs://myreactapp-94a38.firebasestorage.app');
 // 익스포트(내보내기)
-export {firestore, realtime};
+export {firestore, realtime, storage};

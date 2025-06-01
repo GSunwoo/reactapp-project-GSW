@@ -80,7 +80,7 @@ function RegistGroup(props) {
             </td>
           </tr>
         </tbody>
-        <tfoot>
+        <tfoot style={{backgroundColor:'#fff5f5'}}>
           <tr>
             <td colSpan={2}>
               <input type="submit" value="그룹생성" />
