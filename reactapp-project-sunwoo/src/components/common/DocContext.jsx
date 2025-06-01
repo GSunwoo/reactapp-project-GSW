@@ -9,7 +9,7 @@ export const DocProvider = ({ children }) => {
 
   const setDocId = () => {
     const saved = localStorage.getItem('docId');
-    if(saved===undefined){
+    if(!saved){
       localStorage.setItem('docId',4000);
     }
   }

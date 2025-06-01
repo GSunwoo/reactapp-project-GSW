@@ -13,7 +13,7 @@ function Nav() {
     <div id="header-wrapper">
       <div id="header" className="container">
         <div id="logo">
-          <h1><Link to='/'>리액트 프로젝트</Link></h1>
+          <h1><Link to='/'>&nbsp;이름 뭘로 하지?</Link></h1>
         </div>
         <div id="menu">
           <ul>

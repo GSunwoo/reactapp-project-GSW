@@ -5,16 +5,6 @@ import { useDoc } from "../common/DocContext";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-const isImage = (file) => {
-  let ext = file.slice(file.lastIndexOf('.') + 1).toLowerCase();
-  const imageExt = ["jpg", "jpeg", "png", "gif", "webp", "bmp", "svg", "tiff", "tif",
-    "ico", "heic", "heif", "dds", "apng", "raw", "cr2", "nef", "arw", "exr"];
-  for (let i = 0; i < imageExt.length; i++) {
-    if (ext === imageExt[i]) return true;
-  }
-  return false;
-}
-
 function nowDate() {
   const now = new Date();
 
@@ -37,59 +27,59 @@ function DocUpload(props) {
   const did = localStorage.getItem('docId');
   const navigate = useNavigate();
   
-  const imagePath = 'doc-board/images/';
-  const othersPath = 'doc-board/normal-files/';
-
+  const boardPath = 'doc-board/';
+  
   const postContents = async (newPost) => {
+    console.log('postContents');
     await setDoc(doc(firestore, 'doc_post', newPost.id), { ...newPost, writer: itsMe, postTime: nowDate() });
     console.log('입력성공');
     updateDocId();
-
+  }
+  
+  const navigateAndReload = () => {
     navigate('/docboard');
     window.location.reload();
   }
-
+  
   return (<>
     <form onSubmit={(e) => {
       e.preventDefault();
-
+      
       if (itsMe == '') {
         alert('로그인이 필요합니다.');
         return;
       }
-
-      let filePath = '';
-      const userPath = `${itsMe}/${did}/`;
-
-      if (isImage(e.target.upload.files[0].name)) {
-        filePath = imagePath + e.target.upload.files[0].name;
-      }
-      else {
-        filePath = othersPath + e.target.upload.files[0].name;
-      }
-
+      
+      const userPath = itsMe+'/'+boardPath+'/'+did+'/';
+      let filePath = e.target.upload.files[0].name;
+      
       const newPost = {
         id: did,
         title: e.target.title.value,
         contents: e.target.contents.value,
         file: filePath
       }
-
+      
       if (newPost.title === '') {
         alert('제목을 입력하세요');
         return;
       }
-
+      
       if (newPost.contents === '') {
         alert('내용을 입력하세요');
         return;
       }
-
+      
       postContents(newPost);
+      filePath = userPath + filePath;
 
-      const fileRef = ref(storage, (userPath+filePath))
+      const fileRef = ref(storage, filePath);
+
+      navigate('/loading');
+
       uploadBytes(fileRef, e.target.upload.files[0]).then((snapshot) => {
         alert('업로드 성공', snapshot);
+        navigateAndReload();
       });
     }}>
       <table>

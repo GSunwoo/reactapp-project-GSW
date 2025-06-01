@@ -70,7 +70,7 @@ function PublicBoard(props) {
     const indexOfLast = currentPage * postsPerPage;
     const indexOfFirst = indexOfLast - postsPerPage;
     setPubPosts(allPosts.slice(indexOfFirst, indexOfLast));
-  }, [allPosts, currentPage])
+  }, [allPosts, currentPage]);
 
 
   return (<>

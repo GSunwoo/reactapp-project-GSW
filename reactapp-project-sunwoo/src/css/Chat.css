@@ -19,6 +19,7 @@ input[name=message]{width:236px; height:30px;}
   padding-top: 3px;
   padding-bottom: 3px;
   margin-top: 10px;
+  max-width: 150px;
 }
 
 .yourMsg{
@@ -31,6 +32,7 @@ input[name=message]{width:236px; height:30px;}
   padding-top: 3px;
   padding-bottom: 3px;
   margin-top: 5px;
+  max-width: 150px;
 }
 
 .chatName{

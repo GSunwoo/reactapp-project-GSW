@@ -27,6 +27,8 @@ import PublicView from "./components/publicboard/PublicView";
 import PublicEdit from "./components/publicboard/PublicEdit";
 import DocBoard from "./components/docboard/DocBoard";
 import DocUpload from "./components/docboard/DocUpload";
+import LodingPage from "./components/common/LodingPage";
+import DocView from "./components/docboard/DocView";
 
 function App() {
   const location = useLocation();
@@ -68,11 +70,14 @@ function App() {
             {/* 자료게시판 */}
             <Route path="/docboard" element={<DocBoard/>}/>
             <Route path="/docboard/upload" element={<DocUpload/>}/>
+            <Route path="/docboard/view/:id" element={<DocView/>}/>
             
             <Route path="/qnaboard" element={<QnABoard/>}/>
             <Route path="/edit">
               <Route path="member" element={<MemberEdit/>}/>
             </Route>
+
+            <Route path="/loading" element={<LodingPage/>}/>
           </Routes>
       </GroupProvider>
       </DocProvider>
