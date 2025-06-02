@@ -1,7 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "../../config/firestoreConfig";
-import { useAuth } from "../login/AuthContext";
-import { usePublic } from "../common/PublicContext";
+import { useAuth } from "../context/AuthContext";
+import { usePublic } from "../context/PublicContext";
 import { useNavigate } from "react-router-dom";
 
 function PublicWrite(props) {

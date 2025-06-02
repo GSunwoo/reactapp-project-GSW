@@ -1,8 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import WriteGroup from "./WriteGroup";
 import ViewGroupBoard from "./ViewGroupBoard";
-import {useAuth} from '../../login/AuthContext';
-import {useGroups} from '../../common/GroupContext';
+import {useAuth} from '../../context/AuthContext';
+import {useGroups} from '../../context/GroupContext';
 import { useEffect, useState } from "react";
 
 import '../../../css/modal.css';
@@ -10,26 +10,8 @@ import '../../../css/modal.css';
 
 function GroupBoard(props) {
 
-  const {itsMe} = useAuth();
-  const {group} = useGroups();
-  const param = useParams();
-  const gid = param.id;
-
-  const [nowGroup, setNowGroup] = useState({});
-
-  const getNowGroup = () => {
-    if(group==null)return;
-    setNowGroup(group.reduce((pg,cg)=>{
-      if(cg.id===gid){
-        pg = cg;
-      }
-      return pg;
-    },{}));
-  }
-
-  useEffect(()=>{
-    getNowGroup();
-  },[group])
+  const params = useParams();
+  const gbid = params.id;
 
   return (<>
     <div id="page-wrapper">
@@ -40,9 +22,9 @@ function GroupBoard(props) {
             <h2>여기는 그룹 게시판</h2>
           </div>
           <div className="container mt-4">
-            <WriteGroup gid={gid} nowGroup={nowGroup} />
+            <WriteGroup gbid={gbid} />
             <ul className="list-group mt-3" >
-              <ViewGroupBoard comments={comments} setComments={setComments} />
+              <ViewGroupBoard gbid={gbid} />
             </ul>
           </div>
         </div>

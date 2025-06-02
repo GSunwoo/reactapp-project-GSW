@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { storage } from "../../config/firestoreConfig";
-import { useDoc } from "../common/DocContext";
+import { useDoc } from "../context/DocContext";
 import { useEffect, useState } from "react";
 
 function selectTime(time) {

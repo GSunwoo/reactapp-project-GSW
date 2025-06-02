@@ -3,7 +3,7 @@ import { firestore } from "../../config/firestoreConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import '../../css/registform.css';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../login/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 function MemberEdit(props) {
 

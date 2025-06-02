@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { firestore } from "../../config/firestoreConfig";
 import { getDoc, doc, collection, getDocs } from "firebase/firestore";
-import { useAuth } from "../login/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 
 import '../../css/mypage.css'
-import { useGroups } from "../common/GroupContext";
+import { useGroups } from "../context/GroupContext";
 
 function Mypage(props) {
 

@@ -1,10 +1,10 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 
 // 컨텍스트
-import { AuthProvider } from "./components/login/AuthContext";
-import { GroupProvider } from "./components/common/GroupContext";
-import { PublicProvider } from "./components/common/PublicContext";
-import { DocProvider } from "./components/common/DocContext";
+import { AuthProvider } from "./components/context/AuthContext";
+import { GroupProvider } from "./components/context/GroupContext";
+import { PublicProvider } from "./components/context/PublicContext";
+import { DocProvider } from "./components/context/DocContext";
 
 // 컴포넌트
 import Nav from "./components/common/Nav";
@@ -29,6 +29,9 @@ import DocBoard from "./components/docboard/DocBoard";
 import DocUpload from "./components/docboard/DocUpload";
 import LodingPage from "./components/common/LodingPage";
 import DocView from "./components/docboard/DocView";
+import Test from "./components/common/test";
+import { GroupBoardProvider } from "./components/context/GroupBoardContext";
+import DocEdit from "./components/docboard/DocEdit";
 
 function App() {
   const location = useLocation();
@@ -46,39 +49,41 @@ function App() {
       <PublicProvider>
       <DocProvider>
       <GroupProvider>
+      <GroupBoardProvider>
          {/* 메인 */}
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/regist" element={<Regist/>}/>
-            <Route path="/mypage" element={<Mypage/>}/>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/regist" element={<Regist/>}/>
+          <Route path="/mypage" element={<Mypage/>}/>
 
-            {/* 공용게시판 */}
-            <Route path="/pubboard" element={<PublicBoard/>}/>
-            <Route path="/pubboard/write" element={<PublicWrite/>}/>
-            <Route path="/pubboard/view/:id" element={<PublicView/>}/>
-            <Route path="/pubboard/edit/:id" element={<PublicEdit/>}/>
+          {/* 공용게시판 */}
+          <Route path="/pubboard" element={<PublicBoard/>}/>
+          <Route path="/pubboard/write" element={<PublicWrite/>}/>
+          <Route path="/pubboard/view/:id" element={<PublicView/>}/>
+          <Route path="/pubboard/edit/:id" element={<PublicEdit/>}/>
 
-            {/* 그룹 */}
-            <Route path="/group/view/:id"element={<ViewGroup/>}  />
-            <Route path="/group/regist" element={<RegistGroup />}/>
-            <Route path="/group/groupchat" element={<GroupChat />}/>
-            <Route path="/groupboard/:id" element={<GroupBoard/>}/>
-            <Route path="/searchgroup" element={<Searchgroup/>}/>
-            <Route path="/searchgroup/enter/:id" element={<EnterGroup/>}/>
+          {/* 그룹 */}
+          <Route path="/group/view/:id"element={<ViewGroup/>}  />
+          <Route path="/group/regist" element={<RegistGroup />}/>
+          <Route path="/group/groupchat" element={<GroupChat />}/>
+          <Route path="/groupboard/:id" element={<GroupBoard/>}/>
+          <Route path="/searchgroup" element={<Searchgroup/>}/>
+          <Route path="/searchgroup/enter/:id" element={<EnterGroup/>}/>
 
-            {/* 자료게시판 */}
-            <Route path="/docboard" element={<DocBoard/>}/>
-            <Route path="/docboard/upload" element={<DocUpload/>}/>
-            <Route path="/docboard/view/:id" element={<DocView/>}/>
-            
-            <Route path="/qnaboard" element={<QnABoard/>}/>
-            <Route path="/edit">
-              <Route path="member" element={<MemberEdit/>}/>
-            </Route>
+          {/* 자료게시판 */}
+          <Route path="/docboard" element={<DocBoard/>}/>
+          <Route path="/docboard/upload" element={<DocUpload/>}/>
+          <Route path="/docboard/view/:id" element={<DocView/>}/>
+          <Route path="/docboard/edit/:id" element={<DocEdit/>}/>
+          
+          <Route path="/qnaboard" element={<QnABoard/>}/>
+          <Route path="/edit/member" element={<MemberEdit/>}/>
 
-            <Route path="/loading" element={<LodingPage/>}/>
-          </Routes>
+          <Route path="/test" element={<Test/>}></Route>
+          <Route path="/loading" element={<LodingPage/>}/>
+        </Routes>
+      </GroupBoardProvider>
       </GroupProvider>
       </DocProvider>
       </PublicProvider>

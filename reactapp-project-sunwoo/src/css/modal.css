@@ -35,6 +35,11 @@
   opacity: 1;
 }
 
+.btn-primary:hover {
+  background-color: #ff5555;
+  border: #ff5555 1px solid;
+}
+
 /* 입력 필드 영역 */
 .modal-body {
   padding: 20px;
@@ -118,6 +123,11 @@
   color: #F67C78;
 }
 
+.btn{
+  background-color: #F67C78;
+  border: #F67C78 1px solid;
+}
+
 /* 좋아요 버튼 */
 .btn-outline-success.btn-sm {
   color: #F67C78;
@@ -138,8 +148,8 @@
 
 /* 삭제 버튼 */
 .btn-outline-danger.btn-sm {
-  color: #ff6b6b;
-  border-color: #ff6b6b;
+  color: #ffffff;
+  border-color: #ff5555;
   font-weight: bold;
   padding: 4px 10px;
   font-size: 0.8rem;

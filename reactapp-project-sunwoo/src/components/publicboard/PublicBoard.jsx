@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePublic } from "../common/PublicContext";
+import { usePublic } from "../context/PublicContext";
 import { Link, useNavigate } from "react-router-dom";
 import '../../css/publicboard.css';
 

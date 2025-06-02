@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { usePublic } from "../common/PublicContext";
-import { useAuth } from "../login/AuthContext";
+import { usePublic } from "../context/PublicContext";
+import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { firestore } from "../../config/firestoreConfig";
 import { deleteDoc, doc } from "firebase/firestore";

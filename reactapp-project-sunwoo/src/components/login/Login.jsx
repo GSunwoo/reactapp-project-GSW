@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../config/firestoreConfig";

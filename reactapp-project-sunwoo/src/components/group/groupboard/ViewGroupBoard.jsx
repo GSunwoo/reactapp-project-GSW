@@ -1,42 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditGroupBoard from "./EditGroupBoard";
 import '../../../css/modal.css';
+import { useGroupBoard } from "../../context/GroupBoardContext";
+import { useAuth } from "../../context/AuthContext";
+import { useParams } from "react-router-dom";
+import { deleteDoc, doc } from "firebase/firestore";
+import { firestore } from "../../../config/firestoreConfig";
 
 function ViewGroupBoard(props) {
+  const {itsMe} = useAuth();
+  const { groupBoard } = useGroupBoard();
+  const [lists, setLists] = useState();
+  const params = useParams();
+  const gid = params.id;
 
-  //{id:1, writer:'길동이', body:'오늘은 5월27일', likes:0, time:'2025-05-27 10:55:24'}
-  const comments = props.comments;
-  const setComments = props.setComments;
+  const gbid = props.gbid;
 
-  const [commLikes, setCommLikes] = useState();
+  useEffect(() => {
+    const currGroupBoard = groupBoard.filter(curr=>curr.group==gid);
 
-  const commentsList = comments.map((curr)=>{
-    return(
+    const commentsList = currGroupBoard.map((curr) => {
+      return (
         <li key={curr.id} className="list-group-item">
-            <div className="d-flex justify-content-between">
-                <div className="d-flex align-items-center">
-                    <strong>{curr.writer}</strong> <small className="ms-2">{curr.time}</small>
-                </div>
-                <div>
-                    <button className="btn btn-outline-success btn-sm" onClick={(e)=>{
-                      setCommLikes(curr.likes++);
-                    }}>좋아요 ({curr.likes})</button>
-                    <EditGroupBoard comments={comments} setComments={setComments} currentComm={curr} />
-                    <button className="btn btn-outline-danger btn-sm"
-                    onClick={(e)=>{
-                      setComments(comments.filter(now=>now.id!=curr.id));
-                    }}>삭제</button>
-                </div>
+          <div className="d-flex justify-content-between">
+            <div className="d-flex align-items-center">
+              <strong>{curr.title}</strong>&nbsp;&nbsp;<span>{curr.writer}</span><small className="ms-2">{curr.postTime}</small>
             </div>
-            <p className="mt-2 mb-0" style={{'whiteSpace':'pre-wrap'}}>
-                {curr.body}
-            </p>
+            <div>
+              {/* <button className="btn btn-outline-success btn-sm" onClick={(e) => {
+                setCommLikes(curr.likes++);
+              }}>좋아요 ({curr.likes})</button> */}
+              { (itsMe===curr.writer) ?
+              <EditGroupBoard gbid={gbid} currentComm={curr} />:<></>}
+              { (itsMe===curr.writer) ?
+              <button className="btn btn-outline-danger btn-sm"
+                onClick={async(e) => {
+                  if(!confirm('삭제하시겠습니까?'))return;
+                  await deleteDoc(doc(firestore,'group-board', curr.id));
+                  window.location.reload();
+                }}>삭제</button>:<></>
+              }
+            </div>
+          </div>
+          <p className="mt-2 mb-0" style={{ 'whiteSpace': 'pre-wrap' }}>
+            {curr.contents}
+          </p>
         </li>
-    );
-  });
+      );
+    });
+    setLists(commentsList);
+  }, [groupBoard]);
+
+
 
   return (<>
-    {commentsList}
-  </>); 
+    {lists}
+  </>);
 }
 export default ViewGroupBoard;

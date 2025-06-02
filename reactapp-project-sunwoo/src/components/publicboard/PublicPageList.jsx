@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePublic } from "../common/PublicContext";
+import { usePublic } from "../context/PublicContext";
 import { Link } from "react-router-dom";
 
 function PublicPageList(props) {

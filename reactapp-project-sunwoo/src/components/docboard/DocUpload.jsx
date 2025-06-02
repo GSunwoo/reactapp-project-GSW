@@ -1,7 +1,7 @@
 import { ref, uploadBytes } from "firebase/storage";
 import { firestore, storage } from "../../config/firestoreConfig";
-import { useAuth } from "../login/AuthContext";
-import { useDoc } from "../common/DocContext";
+import { useAuth } from "../context/AuthContext";
+import { useDoc } from "../context/DocContext";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -34,11 +34,6 @@ function DocUpload(props) {
     await setDoc(doc(firestore, 'doc_post', newPost.id), { ...newPost, writer: itsMe, postTime: nowDate() });
     console.log('입력성공');
     updateDocId();
-  }
-  
-  const navigateAndReload = () => {
-    navigate('/docboard');
-    window.location.reload();
   }
   
   return (<>
@@ -79,7 +74,8 @@ function DocUpload(props) {
 
       uploadBytes(fileRef, e.target.upload.files[0]).then((snapshot) => {
         alert('업로드 성공', snapshot);
-        navigateAndReload();
+        navigate('/docboard');
+        window.location.reload();
       });
     }}>
       <table>

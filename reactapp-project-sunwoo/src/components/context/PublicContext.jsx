@@ -43,7 +43,7 @@ export const PublicProvider = ({ children }) => {
     });
     setPosts(pubPostsArr);
   }
-
+  
   useEffect(() => {
     setPubId();
     getPubPost();

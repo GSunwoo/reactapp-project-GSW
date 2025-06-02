@@ -1,10 +1,10 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import { firestore, storage } from "../../config/firestoreConfig";
-import { useDoc } from "../common/DocContext";
+import { useDoc } from "../context/DocContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../login/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { deleteObject, getDownloadURL, listAll, ref } from "firebase/storage";
 
 const isImage = (file) => {
   let ext = file.slice(file.lastIndexOf('.') + 1).toLowerCase();
@@ -25,23 +25,30 @@ function DocView(props) {
   const [myPost, setMyPost] = useState(false);
   const [nowPost, setNowPost] = useState({});
   const [nowFile, setNowFile] = useState(null);
+  const [nowFileURL, setNowFileURL] = useState(null);
+  const [path, setPath] = useState('');
 
-  const path = itsMe + '/doc-board/' + did + '/';
-
+  let fileData = <></>;
+  console.log('path',path);
   const fetchFiles = async () => {
-    const listRef = ref(storage, path);  // 원하는 폴더 경로 지정
+    if(path==='')return;
+    const listRef = ref(storage, path);
     try {
-      const res = await listAll(listRef);
-      const urls = await Promise.all(
-        res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return {
-            name: itemRef.name,
-            url: url
-          };
-        })
-      );
-      setNowFile(urls[0]);
+      getDownloadURL(listRef)
+      .then((url)=>{
+        setNowFileURL(url);
+        
+        console.log('url.name', url);
+  
+        if(isImage(path)){
+          fileData = <img src={url} style={{maxWidth:'600px', maxHeight:'600px'}}/>
+        }
+        else{
+          fileData = <a href="#">{nowPost.file}</a>
+        }
+  
+        setNowFile(fileData);
+      })
     } catch (error) {
       console.error("파일 목록 가져오기 실패", error);
     }
@@ -62,9 +69,15 @@ function DocView(props) {
     else {
       setMyPost(false);
     }
+    if(viewPost.file!==undefined){
+      setPath(viewPost.writer + '/doc-board/' + did + '/' + viewPost.file);
+    }
 
-    fetchFiles();
   }, [docs, itsMe]);
+
+  useEffect(()=>{
+    fetchFiles();
+  },[ path ]);
 
   return (<>
     <h2 style={{ color: '#F67C78' }}>자료 게시판</h2>
@@ -87,7 +100,7 @@ function DocView(props) {
         </tr>
         <tr>
           <td colSpan={4}>
-            {nowFile ? nowFile.name : '...'}
+            {nowFile ? nowFile : 'load...'}
           </td>
         </tr>
       </tbody>
@@ -101,8 +114,10 @@ function DocView(props) {
               if (!confirm('삭제하시겠습니까?')) return;
 
               e.preventDefault();
-
+              
               console.log('삭제');
+              const fileRef = ref(storage,path);
+              await deleteObject(fileRef);
               await deleteDoc(doc(firestore, 'doc_post', did));
               navigate('/docboard');
               window.location.reload();

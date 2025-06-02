@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useGroups } from "../common/GroupContext";
-import { useAuth } from "../login/AuthContext";
+import { useGroups } from "../context/GroupContext";
+import { useAuth } from "../context/AuthContext";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../../config/firestoreConfig";
 import { useNavigate } from "react-router-dom";
