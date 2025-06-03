@@ -117,7 +117,7 @@ function DocView(props) {
               
               console.log('삭제');
               const fileRef = ref(storage,path);
-              await deleteObject(fileRef);
+              await deleteObject(fileRef).catch(console.log('삭제할거 없음'));
               await deleteDoc(doc(firestore, 'doc_post', did));
               navigate('/docboard');
               window.location.reload();

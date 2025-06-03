@@ -45,7 +45,7 @@ function DocUpload(props) {
         return;
       }
       
-      const userPath = itsMe+'/'+boardPath+'/'+did+'/';
+      const userPath = itsMe+'/'+boardPath+did+'/';
       let filePath = e.target.upload.files[0].name;
       
       const newPost = {

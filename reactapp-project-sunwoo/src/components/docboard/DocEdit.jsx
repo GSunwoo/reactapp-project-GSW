@@ -12,9 +12,13 @@ function DocEdit(props) {
   const params = useParams();
   const did = params.id;
 
-  const [nowDoc, setNowDoc] = useState({});
+  const [nowDoc, setNowDoc] = useState(null);
   const [path, setPath] = useState(null);
   const [selectNew, setSelectNew] = useState(false);
+  const [nowFile, setNowFile] = useState('');
+
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
 
   const navigate = useNavigate();
 
@@ -32,26 +36,26 @@ function DocEdit(props) {
 
   useEffect(() => {
     getNowDoc();
-
-    if (nowDoc) {
-      setPath(nowDoc.writer + boardPath + '/' + nowDoc.file);
-    }
   }, [docs]);
 
-  useEffect(() => {
-
-  }, [path])
+  useEffect(()=>{
+    if(!nowDoc)return;
+    setTitle(nowDoc.title);
+    setContents(nowDoc.contents);
+    setPath(nowDoc.writer + boardPath + did + '/' +nowDoc.file);
+  },[nowDoc]);
 
   const postContents = async (newPost) => {
     console.log('postContents');
-    await setDoc(doc(firestore, 'doc_post', newPost.id), { ...nowDoc, ...newPost });
+    await setDoc(doc(firestore, 'doc_post', nowDoc.id), { ...nowDoc, ...newPost });
     console.log('입력성공');
   }
 
   const editFile = async (file) => {
+    console.log('path',path);
     const deleteFileRef = ref(storage, path);
-    await deleteObject(deleteFileRef);
-    const uploadFileRef = ref(storage, (nowDoc.writer + boardPath + '/'))
+    await deleteObject(deleteFileRef).catch(console.log('삭제할거 없음'));
+    const uploadFileRef = ref(storage, (nowDoc.writer + boardPath + did + '/'+nowFile))
     await uploadBytes(uploadFileRef, file);
     
     navigate('/docboard');
@@ -67,12 +71,10 @@ function DocEdit(props) {
         return;
       }
 
-      const userPath = itsMe + '/' + boardPath + '/' + did + '/';
-      let filePath = e.target.upload.files[0].name;
       let newPost;
       if(selectNew){
+        let filePath = e.target.fileInput.files[0].name;
         newPost = {
-          id: did,
           title: e.target.title.value,
           contents: e.target.contents.value,
           file: filePath
@@ -80,7 +82,6 @@ function DocEdit(props) {
       }
       else{
         newPost = {
-          id: did,
           title: e.target.title.value,
           contents: e.target.contents.value,
         }
@@ -96,44 +97,57 @@ function DocEdit(props) {
         return;
       }
 
-      postContents(newPost);
-
-      navigate('/loading');
-      if(selectNew){
-        editFile(e.target.upload.files[0]);
-      }
-      else{
-        navigate('/docboard');
-        window.location.reload();
-      }
+      postContents(newPost).then(()=>{
+          if(selectNew){
+            navigate('/loading');
+            editFile(e.target.fileInput.files[0]);
+          }
+          else{
+            navigate('/docboard');
+            window.location.reload();
+          }
+        }
+      );
     }}>
       <table>
         <tbody>
           <tr>
             <td>제목</td>
             <td>
-              <input type="text" id="title" value={nowDoc.title} />
+              <input type="text" id="title" value={title} onChange={(e)=>{setTitle(e.target.value);}}/>
             </td>
           </tr>
           <tr>
             <td>내용</td>
             <td>
-              <textarea id="contents" value={nowDoc.contents}></textarea>
+              <textarea id="contents" value={contents} onChange={(e)=>{setContents(e.target.value);}}></textarea>
             </td>
           </tr>
           <tr>
             <td colSpan={2}>
-              <input type="file" id="upload" name="myfile" onChange={()=>{
-                setSelectNew(true);
-              }}/>
-              {selectNew ? <></>: <span>{nowDoc.file}</span>}
+              <input type="file" id="fileInput" hidden onChange={(e)=>{setSelectNew(true); console.log(selectNew); setNowFile(e.target.files[0].name)}}/>
+              <label htmlFor="fileInput" style={{
+                  display: 'inline-block',
+                  padding: '3px 10px',
+                  backgroundColor: '#F67C78',
+                  color: 'white',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  marginRight: '10px',
+                  fontSize: '0.9em'
+                }
+              }>파일 선택</label>
+              {selectNew ? <span>{nowFile}</span>: (nowDoc?<span>{nowDoc.file}</span>:<span>loading...</span>)}
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td>
-              <input type="submit" value='작성하기' />
+              <input type="submit" value='수정하기' />
+            </td>
+            <td>
+              <button type="button" onClick={()=>{navigate(-1)}}>취소</button>
             </td>
           </tr>
         </tfoot>

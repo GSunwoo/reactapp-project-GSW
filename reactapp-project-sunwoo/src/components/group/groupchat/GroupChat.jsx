@@ -32,6 +32,13 @@ function GroupChat() {
   const chatWindow = useRef();
   const [chatData, setChatData] = useState('');
 
+  const imageRef = 'roomId';
+  const [fileSelected, setFileSelcted] = useState(false);
+  const [nowFile, setNowFile] = useState(null);
+  const [nowFileName, setNowFileName] = useState(null);
+  const [nowFileURL, setNowFileURL] = useState(null);
+
+
   function messageWrite (chatRoom, chatId, chatMessage, date, time) {
     const newPostKey = push(child(ref(realtime), 'tempValue')).key;
     set(ref(realtime, chatRoom+'/'+newPostKey),{
@@ -73,7 +80,7 @@ function GroupChat() {
         else{
           if(prevId!==currId){
           showDiv.push(<div>
-            <div className="chatName" style={{'textAlign' : "left", 'fontSize' : '0.6em'}}>
+            <div className="chatName" style={{'textAlign' : "left", 'fontSize' : '0.8em',fontWeight:'bold'}}>
               {childData.id}
             </div>
           </div>);
@@ -88,8 +95,20 @@ function GroupChat() {
     scrollTop(chatWindow.current);
   },[]);
 
+  useEffect(()=>{
+    const fileInput = document.getElementById('fileInput');
+
+    fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setNowFileURL(imageUrl);
+    }
+  });
+  }, [fileSelected])
+
   return (<>
-    <div className="App">
+    <div className="chat">
       <h2>{roomName} 그룹 톡방</h2>
       대화명 : {userId} &nbsp;&nbsp;
       <button id='closeBtn' onClick={()=>{window.self.close();}}>채팅종료</button>
@@ -117,8 +136,19 @@ function GroupChat() {
         }}>
           <input type='hidden' name="chatRoom" value={roomId}/>
           <input type='hidden' name="chatId" value={userId}/>
-          <input type="text" name="message"/>
-          <button type="submit">전송</button>
+          <input type="file" id='fileInput' hidden onChange={(e)=>{
+            document.getElementById('msg').value = '';
+            setFileSelcted(true);
+          }}/>
+          {fileSelected ? 
+            <><img src={nowFileURL} style={{maxWidth:'250px', maxHeight:'250px'}}/><button type='button' className='sub-btn' onClick={()=>{
+              setFileSelcted(false)
+              setNowFile(document.getElementById('fileInput').files[0]);
+              setNowFileName(document.getElementById('fileInput').files[0].name);
+            }}>취소</button></>:
+            <input type="text" name="message" id='msg'/>}
+          <button type="submit" className='sub-btn'>전송</button>
+          <label htmlFor="fileInput">파일첨부</label>
         </form>
       </div>
     </div>

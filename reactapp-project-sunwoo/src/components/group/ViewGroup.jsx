@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { firestore } from "../../config/firestoreConfig";
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
+import GroupBoard from "./groupboard/GroupBoard";
 
 function ViewGroup(props) {
   const params = useParams();
@@ -114,6 +115,7 @@ function ViewGroup(props) {
         deleteGroup();
         updateMember();
       }}>그룹 삭제</button>)}
+      {/* <GroupBoard /> */}
     </div>
   );
 }

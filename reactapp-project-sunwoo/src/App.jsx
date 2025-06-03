@@ -5,6 +5,7 @@ import { AuthProvider } from "./components/context/AuthContext";
 import { GroupProvider } from "./components/context/GroupContext";
 import { PublicProvider } from "./components/context/PublicContext";
 import { DocProvider } from "./components/context/DocContext";
+import { GroupBoardProvider } from "./components/context/GroupBoardContext";
 
 // 컴포넌트
 import Nav from "./components/common/Nav";
@@ -29,8 +30,6 @@ import DocBoard from "./components/docboard/DocBoard";
 import DocUpload from "./components/docboard/DocUpload";
 import LodingPage from "./components/common/LodingPage";
 import DocView from "./components/docboard/DocView";
-import Test from "./components/common/test";
-import { GroupBoardProvider } from "./components/context/GroupBoardContext";
 import DocEdit from "./components/docboard/DocEdit";
 
 function App() {
@@ -80,7 +79,6 @@ function App() {
           <Route path="/qnaboard" element={<QnABoard/>}/>
           <Route path="/edit/member" element={<MemberEdit/>}/>
 
-          <Route path="/test" element={<Test/>}></Route>
           <Route path="/loading" element={<LodingPage/>}/>
         </Routes>
       </GroupBoardProvider>
