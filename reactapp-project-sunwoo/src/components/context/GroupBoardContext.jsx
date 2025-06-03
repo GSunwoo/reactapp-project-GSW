@@ -9,7 +9,7 @@ export const GroupBoardProvider = ({ children }) => {
 
   const setGrbId = () => {
     const saved = localStorage.getItem('grbId');
-    if(saved===undefined){
+    if(!saved){
       localStorage.setItem('grbId',3500);
     }
   }

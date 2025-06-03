@@ -23,7 +23,7 @@ export const GroupProvider = ({ children }) => {
 
   const setIdNum = () => {
     const saved = localStorage.getItem('groupId');
-    if(saved==undefined){
+    if(!saved){
       localStorage.setItem('groupId', 1);
     }
   }

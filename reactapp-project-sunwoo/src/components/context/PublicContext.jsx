@@ -9,7 +9,7 @@ export const PublicProvider = ({ children }) => {
 
   const setPubId = () => {
     const saved = localStorage.getItem('pubId');
-    if(saved===undefined){
+    if(!saved){
       localStorage.setItem('pubId',2500);
     }
   }
