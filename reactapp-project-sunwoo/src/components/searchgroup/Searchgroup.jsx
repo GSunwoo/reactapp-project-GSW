@@ -71,7 +71,6 @@ function Searchgroup(props) {
                 다음
               </button>
             </div>
-            <button type="button" class="button button-small" onClick={() => { navigete('./write') }} style={{ border: 'none', cursor: 'pointer' }}>새 게시글 작성</button>
           </div>
         </div>
       </div>

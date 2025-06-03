@@ -246,7 +246,7 @@ function MemberEdit(props) {
           </tr>
         </tbody>
         <tfoot style={{ textAlign: 'center' }}>
-          <tr>
+          <tr style={{backgroundColor:'#fff5f5'}}>
             <td colSpan={2} style={{ border: 'none' }}>
               <input type="submit" value="수정하기" id="sub" />
             </td>

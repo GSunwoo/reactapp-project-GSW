@@ -9,6 +9,11 @@
   font-family: "Arial", sans-serif;
   text-align: center;
 }
+.wrapper-viewgroup h2 {
+  text-align: center;
+  color: #F67C78;
+  margin-bottom: 25px;
+}
 
 .wrapper-viewgroup table {
   width: 100%;

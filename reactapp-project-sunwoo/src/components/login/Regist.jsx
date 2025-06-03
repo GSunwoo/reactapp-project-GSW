@@ -183,7 +183,7 @@ function Regist(props) {
       }
 
       memberWrite(newMember);
-
+      alert('회원가입이 완료되었습니다.');
       navigate('/');
       }}>
       <table>
@@ -293,7 +293,7 @@ function Regist(props) {
           </tr>
         </tbody>
         <tfoot style={{ textAlign: 'center' }}>
-          <tr>
+          <tr style={{backgroundColor:'#fff5f5'}}>
             <td colSpan={2} style={{ border: 'none' }}>
               <input type="submit" value="가입하기" id="sub" />
             </td>

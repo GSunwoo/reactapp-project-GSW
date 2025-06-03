@@ -67,13 +67,13 @@ function PublicEdit(props) {
       <table>
         <tbody>
           <tr>
-            <td>제목</td>
+            <th>제목</th>
             <td>
               <input type="text" id="title" value={nowTitle} onChange={(e)=>{setNowTitle(e.target.value)}}/>
             </td>
           </tr>
           <tr>
-            <td>내용</td>
+            <th>내용</th>
             <td>
               <textarea id="contents" value={nowContents} onChange={(e)=>{setNowContents(e.target.value)}}></textarea>
             </td>
@@ -81,7 +81,7 @@ function PublicEdit(props) {
         </tbody>
         <tfoot>
           <tr>
-            <td>
+            <td colSpan={2} style={{backgroundColor:'#fff5f5'}}>
               <input type="submit" value='수정하기' />
             </td>
           </tr>

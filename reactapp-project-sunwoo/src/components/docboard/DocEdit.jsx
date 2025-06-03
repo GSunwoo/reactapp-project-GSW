@@ -6,6 +6,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import '../../css/docedit.css';
+
 function DocEdit(props) {
   const { itsMe } = useAuth();
   const { docs } = useDoc();
@@ -62,7 +64,8 @@ function DocEdit(props) {
     window.location.reload();
   }
 
-  return (<>
+  return (
+  <div id="wrapper-docedit">
     <form onSubmit={(e) => {
       e.preventDefault();
 
@@ -109,22 +112,24 @@ function DocEdit(props) {
         }
       );
     }}>
+      <h2>게시물 수정</h2>
       <table>
         <tbody>
           <tr>
-            <td>제목</td>
+            <th>제목</th>
             <td>
               <input type="text" id="title" value={title} onChange={(e)=>{setTitle(e.target.value);}}/>
             </td>
           </tr>
           <tr>
-            <td>내용</td>
+            <th>내용</th>
             <td>
               <textarea id="contents" value={contents} onChange={(e)=>{setContents(e.target.value);}}></textarea>
             </td>
           </tr>
           <tr>
-            <td colSpan={2}>
+            <th>파일</th>
+            <td>
               <input type="file" id="fileInput" hidden onChange={(e)=>{setSelectNew(true); console.log(selectNew); setNowFile(e.target.files[0].name)}}/>
               <label htmlFor="fileInput" style={{
                   display: 'inline-block',
@@ -153,7 +158,8 @@ function DocEdit(props) {
         </tfoot>
       </table>
     </form>
-  </>);
+  </div>
+  );
 }
 
 export default DocEdit;

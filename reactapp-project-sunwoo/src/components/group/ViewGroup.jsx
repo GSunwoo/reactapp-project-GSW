@@ -18,7 +18,7 @@ function ViewGroup(props) {
   const [isMine, setIsMine] = useState(false);
 
   const openChatWin = () => {
-    window.open(`/group/groupchat?roomId=${nowGroup.groupName}${nowGroup.id}&userId=${itsMe}&roomName=${nowGroup.groupName}`, ''
+    window.open(`/#/group/groupchat?roomId=${nowGroup.groupName}${nowGroup.id}&userId=${itsMe}&roomName=${nowGroup.groupName}`, ''
       , 'width=400,height=600');
   }
 
@@ -91,6 +91,7 @@ function ViewGroup(props) {
 
   return (
     <div className="wrapper-viewgroup">
+      <h2>그룹</h2>
       <table>
         <thead>
           <tr>

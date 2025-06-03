@@ -78,6 +78,7 @@ function EnterGroup(props) {
 
   return (
     <div className="wrapper-viewgroup">
+      <h2>그룹 참여</h2>
       <table>
         <thead>
           <tr>

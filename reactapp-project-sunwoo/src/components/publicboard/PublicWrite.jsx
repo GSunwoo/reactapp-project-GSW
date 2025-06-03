@@ -36,7 +36,8 @@ function PublicWrite(props) {
     window.location.reload();
   }
 
-  return (<>
+  return (
+  <div className="wrapper-pubwrite">
     <form onSubmit={(e) => {
       e.preventDefault();
 
@@ -58,16 +59,17 @@ function PublicWrite(props) {
 
       postContents(newPost);
     }}>
-      <table className="wrapper-pubwrite">
+      <h2>공용 게시판</h2>
+      <table>
         <tbody>
           <tr>
-            <td>제목</td>
+            <th>제목</th>
             <td>
               <input type="text" id="title" />
             </td>
           </tr>
           <tr>
-            <td>내용</td>
+            <th>내용</th>
             <td>
               <textarea id="contents"></textarea>
             </td>
@@ -75,13 +77,14 @@ function PublicWrite(props) {
         </tbody>
         <tfoot>
           <tr>
-            <td style={{backgroundColor:'#fff5f5'}}>
+            <td style={{backgroundColor:'#fff5f5'}} colSpan={2}>
               <input type="submit" value='작성하기' />
             </td>
           </tr>
         </tfoot>
       </table>
     </form>
-  </>);
+  </div>
+  );
 }
 export default PublicWrite;

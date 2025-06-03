@@ -96,7 +96,7 @@ function DocView(props) {
       </thead>
       <tbody>
         <tr>
-          <td colSpan={4} style={{ minHeight: '300px', 'whiteSpace': 'pre-wrap' }}>{nowPost.contents}</td>
+          <td colSpan={4} style={{ minHeight: '300px', 'whiteSpace': 'pre-wrap',borderRadius:'0', borderBottom:'none' }}>{nowPost.contents}</td>
         </tr>
         <tr>
           <td colSpan={4}>

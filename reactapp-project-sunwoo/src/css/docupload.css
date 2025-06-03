@@ -1,4 +1,4 @@
-.wrapper-pubwrite {
+.wrapper-docup {
   width: 600px;
   margin: 50px auto;
   padding: 30px;
@@ -9,19 +9,19 @@
   font-family: "Arial", sans-serif;
 }
 
-.wrapper-pubwrite h2 {
+.wrapper-docup h2 {
   text-align: center;
   color: #F67C78;
   margin-bottom: 25px;
 }
 
-.wrapper-pubwrite table {
+.wrapper-docup table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
 }
 
-.wrapper-pubwrite th {
+.wrapper-docup th {
   text-align: left;
   background-color: #ffc4c9;
   color: #333;
@@ -32,14 +32,14 @@
   border: 1px solid #f3c3c5;
 }
 
-.wrapper-pubwrite td {
+.wrapper-docup td {
   padding: 10px;
   border: 1px solid #f3c3c5;
-  background-color: #ffffff;
 }
 
-.wrapper-pubwrite input[type="text"],
-.wrapper-pubwrite textarea {
+.wrapper-docup input[type="text"],
+.wrapper-docup textarea,
+.wrapper-docup input[type="file"] {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #ccc;
@@ -49,44 +49,45 @@
   box-sizing: border-box;
 }
 
-.wrapper-pubwrite textarea {
+.wrapper-docup textarea {
   min-height: 80px;
 }
 
-.wrapper-pubwrite input[type="submit"] {
+.wrapper-docup input[type="submit"] {
   border: none;
   font-weight: bold;
   border-radius: 5px;
   font-size: 15px;
-  cursor: pointer;
   background-color: #F67C78;
   color: white;
+  cursor: pointer;
   display: block;
   margin: 30px auto 0;
   transition: background-color 0.3s;
 }
 
-.wrapper-pubwrite input[type="submit"]:hover {
+.wrapper-docup input[type="submit"]:hover {
   background-color: #e0757c;
 }
 
+/* 모바일 반응형 */
 @media screen and (max-width: 768px) {
-  .wrapper-pubwrite {
+  .wrapper-docup {
     width: 95%;
     padding: 20px;
   }
 
-  .wrapper-pubwrite th,
-  .wrapper-pubwrite td {
+  .wrapper-docup th,
+  .wrapper-docup td {
     display: block;
     width: 100%;
   }
 
-  .wrapper-pubwrite th {
+  .wrapper-docup th {
     margin-bottom: 5px;
   }
 
-  .wrapper-pubwrite td {
+  .wrapper-docup td {
     padding-top: 0;
   }
 }

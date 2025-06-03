@@ -12,8 +12,9 @@ function Nav() {
   return (<>
     <div id="header-wrapper">
       <div id="header" className="container">
-        <div id="logo">
-          <h1><Link to='/'>&nbsp;StudyHub</Link></h1>
+        <div id="logo" style={{paddingTop:'20px'}}>
+          <img src="../images/book.png" alt="book-logo" id="logo" style={{height:'75px', marginTop:'-23px'}} />
+          <h1><Link to='/' id="logo">&nbsp;StudyHub</Link></h1>
         </div>
         <div id="menu">
           <ul>
