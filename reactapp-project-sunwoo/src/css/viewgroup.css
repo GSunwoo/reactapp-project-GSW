@@ -1,0 +1,51 @@
+.wrapper-viewgroup {
+  width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 2px solid #F67C78;
+  border-radius: 10px;
+  background-color: #fff5f5;
+  box-shadow: 0 0 12px rgba(246, 124, 120, 0.2);
+  font-family: "Arial", sans-serif;
+  text-align: center;
+}
+
+.wrapper-viewgroup table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.wrapper-viewgroup th {
+  text-align: left;
+  background-color: #ffc4c9;
+  color: #333;
+  padding: 10px;
+  width: 150px;
+  font-weight: bold;
+  border: 1px solid #f3c3c5;
+}
+
+.wrapper-viewgroup td {
+  padding: 10px;
+  border: 1px solid #f3c3c5;
+  text-align: left;
+}
+
+/* 버튼 스타일 */
+.wrapper-viewgroup button {
+  background-color: #f67c78;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.wrapper-viewgroup button:hover {
+  background-color: #e46864;
+}

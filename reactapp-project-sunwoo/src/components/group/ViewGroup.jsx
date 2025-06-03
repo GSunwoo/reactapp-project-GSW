@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { firestore } from "../../config/firestoreConfig";
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import GroupBoard from "./groupboard/GroupBoard";
+import '../../css/viewgroup.css';
 
 function ViewGroup(props) {
   const params = useParams();

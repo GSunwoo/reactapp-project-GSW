@@ -3,6 +3,7 @@ import { firestore } from "../../config/firestoreConfig";
 import { useAuth } from "../context/AuthContext";
 import { usePublic } from "../context/PublicContext";
 import { useNavigate } from "react-router-dom";
+import '../../css/pubwrite.css';
 
 function PublicWrite(props) {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ function PublicWrite(props) {
 
       postContents(newPost);
     }}>
-      <table>
+      <table className="wrapper-pubwrite">
         <tbody>
           <tr>
             <td>제목</td>
@@ -74,13 +75,12 @@ function PublicWrite(props) {
         </tbody>
         <tfoot>
           <tr>
-            <td>
+            <td style={{backgroundColor:'#fff5f5'}}>
               <input type="submit" value='작성하기' />
             </td>
           </tr>
         </tfoot>
       </table>
-
     </form>
   </>);
 }

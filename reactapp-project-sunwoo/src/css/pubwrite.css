@@ -1,0 +1,83 @@
+.wrapper-pubwrite {
+  width: 100%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 2px solid #F67C78;
+  border-radius: 15px; /* 테이블 외곽 둥글게 */
+  background-color: #fff5f5;
+  box-shadow: 0 0 15px rgba(246, 124, 120, 0.25);
+  font-family: "Arial", sans-serif;
+  border-collapse: separate; /* 중요: 둥근 모서리 유지 */
+  border-spacing: 0; /* 셀 간격 제거 */
+}
+
+.wrapper-pubwrite td {
+  padding: 12px;
+  border: 1px solid #f3c3c5;
+  vertical-align: top;
+  background-color: white;
+}
+
+/* 좌상단 셀 */
+.wrapper-pubwrite tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+}
+
+/* 우상단 셀 */
+.wrapper-pubwrite tr:first-child td:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* 좌하단 셀 */
+.wrapper-pubwrite tfoot tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+/* 우하단 셀 */
+.wrapper-pubwrite tfoot tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.wrapper-pubwrite td {
+  padding: 12px;
+  border: 1px solid #f3c3c5; /* 셀 테두리 추가 */
+  vertical-align: top;
+}
+
+.wrapper-pubwrite input[type="text"],
+.wrapper-pubwrite textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  resize: vertical;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: box-shadow 0.2s ease;
+}
+
+.wrapper-pubwrite input[type="text"]:focus,
+.wrapper-pubwrite textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(246, 124, 120, 0.4);
+}
+
+.wrapper-pubwrite textarea {
+  min-height: 150px;
+}
+
+.wrapper-pubwrite input[type="submit"] {
+  background-color: #f67c78;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto 0;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
