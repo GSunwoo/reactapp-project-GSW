@@ -10,7 +10,7 @@ export const GroupBoardProvider = ({ children }) => {
   const setGrbId = () => {
     const saved = localStorage.getItem('grbId');
     if(saved===undefined){
-      localStorage.setItem('grbId',3000);
+      localStorage.setItem('grbId',3500);
     }
   }
   
@@ -58,7 +58,7 @@ export const GroupBoardProvider = ({ children }) => {
   }, []);
 
   return (
-    <GroupBoardContext.Provider value={{groupBoard, setGroupBoard, updateGrbId, getGrbId}}>
+    <GroupBoardContext.Provider value={{groupBoard, setGroupBoard, updateGrbId, getGrbId, setGrbId}}>
       {children}
     </GroupBoardContext.Provider>
   );

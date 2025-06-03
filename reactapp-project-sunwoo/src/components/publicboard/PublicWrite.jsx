@@ -8,7 +8,9 @@ import '../../css/pubwrite.css';
 function PublicWrite(props) {
   const navigate = useNavigate();
   const { itsMe } = useAuth();
-  const { getPubId, updatePubId } = usePublic();
+  const { getPubId, updatePubId, setPubId } = usePublic();
+
+  setPubId();
 
   function nowDate() {
     const now = new Date();

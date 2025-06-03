@@ -6,12 +6,15 @@ import {useGroups} from '../../context/GroupContext';
 import { useEffect, useState } from "react";
 
 import '../../../css/modal.css';
+import { useGroupBoard } from "../../context/GroupBoardContext";
 
 
 function GroupBoard(props) {
-
+  const { setGrbId } = useGroupBoard();
   const params = useParams();
   const gbid = params.id;
+
+  setGrbId();
 
   return (<>
     <div id="page-wrapper">

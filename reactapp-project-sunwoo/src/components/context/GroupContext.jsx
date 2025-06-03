@@ -11,7 +11,7 @@ export const GroupProvider = ({ children }) => {
   const setGrPostId = () => {
     const saved = localStorage.getItem('groupPost');
     if(saved==undefined){
-      localStorage.setItem('groupPost', 1000);
+      localStorage.setItem('groupPost', 1500);
     }
   }
 
@@ -61,7 +61,7 @@ export const GroupProvider = ({ children }) => {
   }, []);
 
   return (
-    <GroupContext.Provider value={{groups, setGroups, updateIdNum, updateGrPostId}}>
+    <GroupContext.Provider value={{groups, setGroups, updateIdNum, updateGrPostId, setIdNum}}>
       {children}
     </GroupContext.Provider>
   );

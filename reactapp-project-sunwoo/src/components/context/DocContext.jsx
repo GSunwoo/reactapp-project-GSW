@@ -10,7 +10,7 @@ export const DocProvider = ({ children }) => {
   const setDocId = () => {
     const saved = localStorage.getItem('docId');
     if(!saved){
-      localStorage.setItem('docId',4000);
+      localStorage.setItem('docId',4500);
     }
   }
 
@@ -47,7 +47,7 @@ export const DocProvider = ({ children }) => {
   }, []);
 
   return (
-    <DocContext.Provider value={{docs, setDocs, updateDocId}}>
+    <DocContext.Provider value={{docs, setDocs, updateDocId, setDocId}}>
       {children}
     </DocContext.Provider>
   );

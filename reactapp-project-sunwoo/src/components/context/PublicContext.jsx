@@ -10,7 +10,7 @@ export const PublicProvider = ({ children }) => {
   const setPubId = () => {
     const saved = localStorage.getItem('pubId');
     if(saved===undefined){
-      localStorage.setItem('pubId',3000);
+      localStorage.setItem('pubId',2500);
     }
   }
   
@@ -50,7 +50,7 @@ export const PublicProvider = ({ children }) => {
   }, []);
 
   return (
-    <PublicContext.Provider value={{posts, setPosts, updatePubId, getPubId}}>
+    <PublicContext.Provider value={{posts, setPosts, updatePubId, getPubId, setPubId}}>
       {children}
     </PublicContext.Provider>
   );

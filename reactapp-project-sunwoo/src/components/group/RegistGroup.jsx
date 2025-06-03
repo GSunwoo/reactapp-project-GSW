@@ -9,10 +9,12 @@ import '../../css/groupregi.css';
 
 function RegistGroup(props) {
   const {itsMe} = useAuth();
-  const {updateIdNum} = useGroups();
+  const {updateIdNum, setIdNum} = useGroups();
   const navigate = useNavigate();
 
+  setIdNum();
   const gid = localStorage.getItem('groupId')
+
 
   function nowDate() {
     const now = new Date();
