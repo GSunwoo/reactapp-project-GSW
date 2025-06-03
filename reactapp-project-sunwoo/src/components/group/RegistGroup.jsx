@@ -12,8 +12,10 @@ function RegistGroup(props) {
   const {updateIdNum, setIdNum} = useGroups();
   const navigate = useNavigate();
 
-  setIdNum();
-  const gid = localStorage.getItem('groupId')
+  const gid = localStorage.getItem('groupId');
+  useEffect(()=>{
+    setIdNum();
+  },[])
 
 
   function nowDate() {

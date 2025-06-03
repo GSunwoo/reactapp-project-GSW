@@ -16,7 +16,6 @@ import Home from "./components/home/Home";
 import GroupBoard from "./components/group/groupboard/GroupBoard";
 import Searchgroup from "./components/searchgroup/Searchgroup";
 import Footer from "./components/common/Footer";
-import QnABoard from "./components/qnaboard/QnABoard";
 import GroupChat from "./components/group/groupchat/GroupChat";
 import Regist from "./components/login/Regist";
 import MemberEdit from "./components/mypage/MemberEdit";
@@ -55,6 +54,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/regist" element={<Regist/>}/>
           <Route path="/mypage" element={<Mypage/>}/>
+          <Route path="/edit/member" element={<MemberEdit/>}/>
 
           {/* 공용게시판 */}
           <Route path="/pubboard" element={<PublicBoard/>}/>
@@ -76,8 +76,6 @@ function App() {
           <Route path="/docboard/view/:id" element={<DocView/>}/>
           <Route path="/docboard/edit/:id" element={<DocEdit/>}/>
           
-          <Route path="/qnaboard" element={<QnABoard/>}/>
-          <Route path="/edit/member" element={<MemberEdit/>}/>
 
           <Route path="/loading" element={<LodingPage/>}/>
         </Routes>

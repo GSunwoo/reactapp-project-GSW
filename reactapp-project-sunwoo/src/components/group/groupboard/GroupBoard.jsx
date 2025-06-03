@@ -14,7 +14,9 @@ function GroupBoard(props) {
   const params = useParams();
   const gbid = params.id;
 
-  setGrbId();
+  useEffect(()=>{
+    setGrbId();
+  },[])
 
   return (<>
     <div id="page-wrapper">
@@ -22,7 +24,7 @@ function GroupBoard(props) {
       <div id="page" class="container">
         <div id="content">
           <div class="title">
-            <h2>여기는 그룹 게시판</h2>
+            <h2>그룹 게시판</h2>
           </div>
           <div className="container mt-4">
             <WriteGroup gbid={gbid} />

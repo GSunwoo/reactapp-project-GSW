@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 import '../../css/docupload.css';
+import { useEffect } from "react";
 
 function nowDate() {
   const now = new Date();
@@ -31,7 +32,9 @@ function DocUpload(props) {
 
   const boardPath = 'doc-board/';
 
-  setDocId();
+  useEffect(()=>{
+    setDocId();
+  },[])
 
   const postContents = async (newPost) => {
     console.log('postContents');

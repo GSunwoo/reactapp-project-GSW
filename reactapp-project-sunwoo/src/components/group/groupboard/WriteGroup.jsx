@@ -62,7 +62,7 @@ function WriteGroup(props) {
             
           }}>
             <div className="modal-header">
-              <h5 className="modal-title" id="commentModalLabel">댓글 작성</h5>
+              <h5 className="modal-title" id="commentModalLabel">게시글 작성</h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={(e) => {
                 document.getElementById('title').value = '';
                 document.getElementById('contents').value = '';

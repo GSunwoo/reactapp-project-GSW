@@ -4,13 +4,16 @@ import { useAuth } from "../context/AuthContext";
 import { usePublic } from "../context/PublicContext";
 import { useNavigate } from "react-router-dom";
 import '../../css/pubwrite.css';
+import { useEffect } from "react";
 
 function PublicWrite(props) {
   const navigate = useNavigate();
   const { itsMe } = useAuth();
   const { getPubId, updatePubId, setPubId } = usePublic();
 
-  setPubId();
+  useEffect(()=>{
+    setPubId();
+  },[])
 
   function nowDate() {
     const now = new Date();
