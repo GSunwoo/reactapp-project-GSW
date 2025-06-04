@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useGroups } from "../context/GroupContext";
+import { useGroups } from "../../context/GroupContext";
 import '../../css/publicboard.css';
 
 function Searchgroup(props) {

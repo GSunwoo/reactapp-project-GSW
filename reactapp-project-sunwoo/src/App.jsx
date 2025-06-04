@@ -14,13 +14,13 @@ import PublicBoard from "./components/publicboard/PublicBoard";
 import Login from "./components/login/Login";
 import Home from "./components/home/Home";
 import GroupBoard from "./components/group/groupboard/GroupBoard";
-import Searchgroup from "./components/searchgroup/Searchgroup";
+import Searchgroup from "./components/group/searchgroup/Searchgroup";
 import Footer from "./components/common/Footer";
 import GroupChat from "./components/group/groupchat/GroupChat";
 import Regist from "./components/login/Regist";
 import MemberEdit from "./components/mypage/MemberEdit";
 import RegistGroup from "./components/group/RegistGroup";
-import EnterGroup from './components/searchgroup/EnterGroup'
+import EnterGroup from './components/group/searchgroup/EnterGroup'
 import ViewGroup from "./components/group/ViewGroup";
 import PublicWrite from "./components/publicboard/PublicWrite";
 import PublicView from "./components/publicboard/PublicView";
